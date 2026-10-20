@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 243 245 242;
+    --surface: 255 255 255;
+    --surface-2: 235 239 234;
+    --border: 220 225 218;
+    --fg: 22 26 51;
+    --muted: 92 99 122;
+    --brand: 11 122 86;
+    --brand-fg: 255 255 255;
+    --brand-soft: 218 238 228;
+    --accent: 242 178 27;
+    --success: 21 128 61;
+    --warning: 180 83 9;
+    --danger: 214 56 62;
+    color-scheme: light;
+  }
+  .dark {
+    --bg: 13 18 32;
+    --surface: 20 26 44;
+    --surface-2: 28 35 58;
+    --border: 42 50 78;
+    --fg: 236 239 245;
+    --muted: 150 158 184;
+    --brand: 56 201 148;
+    --brand-fg: 6 30 22;
+    --brand-soft: 20 52 48;
+    --accent: 245 196 70;
+    --success: 74 222 128;
+    --warning: 251 191 36;
+    --danger: 248 113 113;
+    color-scheme: dark;
+  }
+
+  * { @apply border-border; }
+  html { -webkit-tap-highlight-color: transparent; }
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 { @apply font-display; }
+  h1, h2, h3, .font-display { font-optical-sizing: auto; letter-spacing: -0.025em; }
+  :focus-visible { @apply outline-none ring-2 ring-brand ring-offset-2 ring-offset-bg; }
+  ::selection { background: rgb(var(--accent) / 0.45); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  .card { @apply rounded-2xl border bg-surface; }
+  .input {
+    @apply h-11 w-full rounded-xl border bg-surface px-3.5 text-[15px] text-fg placeholder:text-muted/70
+           transition-colors focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/15
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .label { @apply mb-1.5 block text-sm font-medium text-fg; }
+  .prose-sk { @apply max-w-[68ch] text-[15.5px] leading-7 text-fg/90; }
+  .prose-sk p { @apply mb-4; }
+  .prose-sk ul { @apply mb-4 list-disc space-y-1 pl-5; }
+  .prose-sk strong { @apply font-semibold text-fg; }
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+}
