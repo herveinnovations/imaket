@@ -6,6 +6,7 @@ import { z } from "zod";
 import { getServerSupabase } from "@/lib/supabase/server";
 import { env, isDemoMode } from "@/lib/env";
 import { rateLimit } from "@/lib/api";
+import { siteHost } from "@/lib/utils";
 
 export type AuthState = { error?: string; success?: string; fields?: Record<string, string> } | undefined;
 
@@ -52,7 +53,7 @@ export async function signUp(_: AuthState, fd: FormData): Promise<AuthState> {
   const supabase = (await getServerSupabase())!;
   if (parsed.data.role === "creator" && parsed.data.handle) {
     const { data: taken } = await supabase.from("imaket_creators").select("id").eq("handle", parsed.data.handle).maybeSingle();
-    if (taken) return { error: `imaket.africa/${parsed.data.handle} is taken. Try another store link.`, fields };
+    if (taken) return { error: `${siteHost()}/${parsed.data.handle} is taken. Try another store link.`, fields };
   }
   const { error } = await supabase.auth.signUp({
     email: parsed.data.email,

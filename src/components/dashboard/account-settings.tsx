@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/primitives";
 import { ThemeSelect } from "@/components/layout/theme-toggle";
 import type { AppUser } from "@/lib/types";
+import { siteHost } from "@/lib/utils";
 
 const COUNTRIES = [["ZM", "Zambia"], ["NG", "Nigeria"], ["KE", "Kenya"], ["GH", "Ghana"], ["UG", "Uganda"], ["TZ", "Tanzania"], ["RW", "Rwanda"], ["ZA", "South Africa"], ["MW", "Malawi"], ["ZW", "Zimbabwe"], ["BW", "Botswana"], ["US", "United States"], ["GB", "United Kingdom"]];
 
@@ -77,7 +78,7 @@ export function AccountSettings({ user, isCreator }: { user: AppUser; isCreator:
           <h2 className="font-sans text-base font-semibold tracking-normal">Start selling</h2>
           <p className="text-sm text-muted">Open a store on this account. It&apos;s free; you pay 5% only when you sell.</p>
           <div className="flex items-center rounded-xl border bg-surface focus-within:border-brand">
-            <span className="pl-3.5 text-[15px] text-muted">imaket.africa/</span>
+            <span className="pl-3.5 text-[15px] text-muted">{siteHost()}/</span>
             <input value={handle} onChange={(e) => setHandle(e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, ""))} placeholder="yourname" aria-label="Store link" className="h-11 min-w-0 flex-1 bg-transparent pr-3 outline-none" />
           </div>
           <Button type="submit" loading={busy === "sell"} disabled={handle.length < 3}>Open my store</Button>

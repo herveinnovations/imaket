@@ -13,7 +13,7 @@ import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { NotificationDropdown } from "./notification-dropdown";
 import { Avatar } from "@/components/ui/primitives";
 import { signOut } from "@/app/(auth)/actions";
-import { cn } from "@/lib/utils";
+import { cn, siteHost } from "@/lib/utils";
 import type { Notification } from "@/lib/types";
 
 type Area = "customer" | "creator" | "admin";
@@ -91,7 +91,7 @@ export function DashboardShell({
       </div>
       {area === "creator" && storeHandle && (
         <Link href={`/${storeHandle}`} target="_blank" className="mx-3 mb-3 flex items-center justify-between rounded-xl border bg-bg px-3 py-2.5 text-sm hover:border-fg/25">
-          <span className="truncate text-muted">imaket.africa/<span className="text-fg">{storeHandle}</span></span>
+          <span className="truncate text-muted">{siteHost()}/<span className="text-fg">{storeHandle}</span></span>
           <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted" />
         </Link>
       )}

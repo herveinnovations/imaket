@@ -5,7 +5,7 @@ import { useActionState, useState } from "react";
 import { Eye, EyeOff, ShoppingBag, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/primitives";
-import { cn } from "@/lib/utils";
+import { cn, siteHost } from "@/lib/utils";
 import { requestPasswordReset, signIn, signUp, updatePassword, type AuthState } from "@/app/(auth)/actions";
 
 function FormError({ state }: { state: AuthState }) {
@@ -73,7 +73,7 @@ export function RegisterForm({ defaultRole }: { defaultRole: "creator" | "custom
         <div>
           <label htmlFor="handle" className="label">Store link</label>
           <div className="flex items-center rounded-xl border bg-surface focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/15">
-            <span className="pl-3.5 text-[15px] text-muted">imaket.africa/</span>
+            <span className="pl-3.5 text-[15px] text-muted">{siteHost()}/</span>
             <input id="handle" name="handle" required value={handle} onChange={(e) => setHandle(e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, ""))}
               className="h-11 min-w-0 flex-1 bg-transparent pr-3 text-[15px] outline-none" placeholder="yourname" maxLength={32} />
           </div>

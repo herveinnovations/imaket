@@ -94,6 +94,11 @@ export function absoluteUrl(path = "") {
   return `${base.replace(/\/$/, "")}${path}`;
 }
 
+/** Host shown in store links, e.g. "imaket.vercel.app" (from NEXT_PUBLIC_APP_URL). */
+export function siteHost() {
+  return absoluteUrl().replace(/^https?:\/\//, "");
+}
+
 export function percentChange(current: number, previous: number) {
   if (!previous) return current ? 100 : 0;
   return ((current - previous) / previous) * 100;

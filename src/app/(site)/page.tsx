@@ -5,7 +5,7 @@ import { ProductCard } from "@/components/product/product-card";
 import { ButtonLink } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/primitives";
 import { getFeaturedCreators, getProducts } from "@/lib/data/catalog";
-import { formatCompact, formatMoney } from "@/lib/utils";
+import { formatCompact, formatMoney, siteHost } from "@/lib/utils";
 
 const SELLABLE = [
   { type: "digital", name: "Downloads", example: "Budget spreadsheets, e-books, Procreate brushes, beat packs", eg: "The Lusaka Budget Planner, K150" },
@@ -96,7 +96,7 @@ export default async function LandingPage() {
           <h2 className="max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">From a WhatsApp link to money on your phone</h2>
           <ol className="mt-14 grid gap-10 md:grid-cols-3">
             {[
-              ["Share your store link", "imaket.africa/yourname works anywhere: WhatsApp status, Instagram bio, TikTok. Track which one sells."],
+              ["Share your store link", `${siteHost()}/yourname works anywhere: WhatsApp status, Instagram bio, TikTok. Track which one sells.`],
               ["Buyers pay how they like", "A prompt appears on the buyer's phone for MoMo, Airtel Money or M-Pesa. Cards and PayPal work too. Files are delivered the moment payment clears."],
               ["Withdraw to MoMo or bank", "Sales clear after 7 days. Withdraw to your mobile money number or bank account in your own currency."],
             ].map(([t, b], i) => (

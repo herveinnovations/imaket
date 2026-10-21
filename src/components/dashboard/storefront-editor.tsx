@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Avatar, Input, Textarea } from "@/components/ui/primitives";
 import { CoverUpload } from "./file-upload";
-import { cn } from "@/lib/utils";
+import { cn, siteHost } from "@/lib/utils";
 import type { Creator, Product } from "@/lib/types";
 
 const SWATCHES = ["#0B7A56", "#1E3A8A", "#6D28D9", "#9D174D", "#B45309", "#0F766E", "#C2410C", "#161A33"];
@@ -49,7 +49,7 @@ export function StorefrontEditor({ creator, products }: { creator: Creator; prod
             <div>
               <label htmlFor="handle" className="label">Store link</label>
               <div className="flex items-center rounded-xl border bg-surface focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/15">
-                <span className="pl-3.5 text-[15px] text-muted">imaket.africa/</span>
+                <span className="pl-3.5 text-[15px] text-muted">{siteHost()}/</span>
                 <input id="handle" value={s.handle} onChange={(e) => up({ handle: e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, "") })} className="h-11 min-w-0 flex-1 bg-transparent pr-3 outline-none" />
               </div>
               {s.handle !== creator.handle && <p className="mt-1.5 text-sm text-warning">Your old link stops working when you save.</p>}
