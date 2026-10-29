@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { startNavigation } from "@/components/ui/page-loader";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -127,7 +128,7 @@ export function CheckoutForm({
     items.forEach((i) => remove(i.productId));
     if (allItems.length === items.length) clear();
     if (json.redirectUrl?.startsWith("http")) window.location.href = json.redirectUrl;
-    else router.push(json.redirectUrl ?? `/checkout/success?order=${json.orderId}`);
+    else { startNavigation(); router.push(json.redirectUrl ?? `/checkout/success?order=${json.orderId}`); }
   }
 
   if (!mounted) return <div className="mt-10 h-96 animate-pulse rounded-3xl bg-surface-2" />;

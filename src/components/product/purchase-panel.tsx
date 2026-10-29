@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { startNavigation } from "@/components/ui/page-loader";
 import { useState } from "react";
 import { toast } from "sonner";
 import { QtyStepper } from "./quick-view";
@@ -29,6 +30,7 @@ export function PurchasePanel({ product: p }: { product: Product }) {
     fetch("/api/analytics", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ event: "add_to_cart", productId: p.id, creatorId: p.creator_id }) }).catch(() => {});
     if (goToCheckout) {
       setOpen(false);
+      startNavigation();
       router.push("/checkout");
     }
   }

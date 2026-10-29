@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { startNavigation } from "@/components/ui/page-loader";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -77,7 +78,7 @@ export function AccountSettings({ user, isCreator }: { user: AppUser; isCreator:
       </form>
 
       {!isCreator && (
-        <form id="sell" onSubmit={run("sell", async () => { await send("/api/creator/become", { handle }, "POST"); router.push("/creator"); }, "Your store is ready")}
+        <form id="sell" onSubmit={run("sell", async () => { await send("/api/creator/become", { handle }, "POST"); startNavigation(); router.push("/creator"); }, "Your store is ready")}
           className="card scroll-mt-24 space-y-4 border-black bg-lime p-6">
           <h2 className="font-sans text-base font-semibold tracking-normal">Start selling</h2>
           <p className="text-sm text-muted">Open a store on this account. It&apos;s free; you pay 5% only when you sell.</p>

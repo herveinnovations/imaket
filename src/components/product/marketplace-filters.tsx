@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { startNavigation } from "@/components/ui/page-loader";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useState, useTransition } from "react";
 import { ChevronDown, Minus, Plus, SlidersHorizontal, X } from "lucide-react";
@@ -22,6 +23,7 @@ export function useFilterNav() {
     const next = new URLSearchParams(params.toString());
     Object.entries(patch).forEach(([k, v]) => (v ? next.set(k, v) : next.delete(k)));
     next.delete("page");
+    startNavigation();
     start(() => router.push(`${pathname}?${next.toString()}`, { scroll: false }));
   };
   return { params, set, pending };
