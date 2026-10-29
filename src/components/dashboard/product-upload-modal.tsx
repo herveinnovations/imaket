@@ -125,7 +125,7 @@ export function ProductUploadModal({ open, onClose, categories, currency, produc
     const json = await res.json().catch(() => ({}));
     setSaving(null);
     if (!res.ok) return toast.error(json.error ?? "Couldn't save the product.");
-    toast.success(mode === "draft" ? "Draft saved" : json.product?.status === "published" ? "Published" : "Submitted for review", {
+    toast.success(mode === "draft" ? "Draft saved" : json.product?.status === "published" ? "Published. It's live in the shop." : "Submitted for review", {
       description: mode === "submit" && json.product?.status !== "published" ? "We usually review new products within a few hours." : undefined,
     });
     onClose();
@@ -145,7 +145,7 @@ export function ProductUploadModal({ open, onClose, categories, currency, produc
           {isLast ? (
             <>
               <Button variant="secondary" loading={saving === "draft"} disabled={uploading} onClick={() => save("draft")}>Save as draft</Button>
-              <Button loading={saving === "submit"} disabled={uploading} onClick={() => save("submit")}>{product?.status === "published" ? "Save changes" : "Submit for review"}</Button>
+              <Button loading={saving === "submit"} disabled={uploading} onClick={() => save("submit")}>{product?.status === "published" ? "Save changes" : "Publish"}</Button>
             </>
           ) : step > 0 && <Button onClick={next} disabled={uploading}>{waitLabel ?? "Continue"}</Button>}
         </>
