@@ -3,9 +3,8 @@ import type { ProductType } from "@/lib/types";
 
 /** Curated cover palette: [background, ink] */
 const PALETTE: [string, string][] = [
-  ["#0B7A56", "#E9F7EF"], ["#1E3A8A", "#E0E9FF"], ["#6D28D9", "#F1E9FF"], ["#B45309", "#FFF3DC"],
-  ["#9D174D", "#FFE4EF"], ["#0F766E", "#DDFBF5"], ["#161A33", "#F2B21B"], ["#C2410C", "#FFEADB"],
-  ["#F2B21B", "#161A33"], ["#E7ECE6", "#0B7A56"],
+  ["#D6FF38", "#000000"], ["#000000", "#D6FF38"], ["#E6E6E6", "#000000"], ["#E6E7DA", "#008528"],
+  ["#008528", "#D6FF38"], ["#E6E6E6", "#008528"], ["#FFFFFF", "#000000"], ["#E6E7DA", "#000000"],
 ];
 
 function hash(s: string) {
@@ -16,7 +15,7 @@ function hash(s: string) {
 
 /** Type-specific motif drawn behind the title */
 function Motif({ type, ink }: { type: ProductType; ink: string }) {
-  const common = { stroke: ink, fill: "none", strokeOpacity: 0.22, strokeWidth: 1.5 };
+  const common = { stroke: ink, fill: "none", strokeOpacity: 0.35, strokeWidth: 2 };
   switch (type) {
     case "course":
       return (
@@ -71,7 +70,7 @@ export function ProductCover({
     <div className={cn("relative overflow-hidden", className)} style={{ background: bg, color: ink }} aria-hidden>
       <Motif type={type} ink={ink} />
       <div className={cn("absolute inset-x-0 bottom-0 flex flex-col", size === "sm" ? "p-3" : size === "lg" ? "p-8" : "p-5")}>
-        <span className={cn("font-display font-semibold leading-[0.95] tracking-tight [text-wrap:balance]",
+        <span className={cn("font-display leading-[1] tracking-[-0.05em] [text-wrap:balance]",
           size === "sm" ? "text-base" : size === "lg" ? "text-4xl sm:text-5xl" : "text-[1.6rem]")}>
           {title}
         </span>

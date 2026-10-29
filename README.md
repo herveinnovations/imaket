@@ -1,5 +1,7 @@
 # iMaket — African creator marketplace
 
+Design follows the iMaket Wix site (Harmony streetwear template): lime `#D6FF38` header/footer, Arial Black headlines, square imagery, green pill buttons, Quick View, Men/Women/New, Groups and Members.
+
 A full-stack marketplace where creators sell **digital downloads, online courses, services, event tickets, memberships and physical products** from their own storefront, and buyers pay with **mobile money (MTN, Airtel, Zamtel, M-Pesa…), cards or PayPal**.
 
 **Stack:** Next.js 15 (App Router, React 19) · Tailwind CSS · Framer Motion · Supabase (Postgres, Auth, Storage, Realtime) · Recharts · Zod · Zustand
@@ -23,7 +25,9 @@ iMaket runs on the **`imaket_*` tables** in your Supabase project. The schema in
 ### 1. Database
 **Already done for the live project:** all 28 tables, RLS policies, functions, triggers, storage buckets, seed categories/settings and realtime are installed.
 
-For **another empty project**, paste `supabase/fresh-install/imaket_schema.sql` into the SQL Editor and Run (one file, no DROP statements).
+For **another empty project**, paste `supabase/fresh-install/imaket_schema.sql` into the SQL Editor and Run, then run `supabase/migrations/20261029000001_imaket_storefront_community.sql` (no DROP statements in either).
+
+**Storefront & community update (Oct 2026):** `20261029000001_imaket_storefront_community.sql` adds Men/Women collections, sitewide discount codes (TEES25, WELCOME10), newsletter sign-ups, Groups (posts, comments, private groups with join requests) and the Members directory with follows. It only adds things. Checks: `begin;` + the migration + `supabase/tests/community_checks.sql` + `rollback;` (32 results).
 
 For a project that still has the **older imaket tables**, use the merge instead: `supabase/migrations/` holds imaket's original seven migrations plus `20261021000001_sokoni_merge_into_imaket.sql`. Dry run: `begin;` + the merge + `supabase/tests/merge_rehearsal.sql` + `rollback;` (ends with a **REHEARSAL RESULTS** error listing 40 checks; nothing is kept). The earlier standalone schema is in `supabase/legacy-standalone/` for reference only.
 

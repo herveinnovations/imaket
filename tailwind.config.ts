@@ -4,7 +4,7 @@ const config: Config = {
   darkMode: "class",
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
-    container: { center: true, padding: "1rem", screens: { "2xl": "1280px" } },
+    container: { center: true, padding: { DEFAULT: "1rem", lg: "1.25rem" }, screens: { "2xl": "1440px" } },
     extend: {
       colors: {
         bg: "rgb(var(--bg) / <alpha-value>)",
@@ -19,26 +19,31 @@ const config: Config = {
           soft: "rgb(var(--brand-soft) / <alpha-value>)",
         },
         accent: "rgb(var(--accent) / <alpha-value>)",
+        lime: "rgb(var(--lime) / <alpha-value>)",
+        stone: "rgb(var(--stone) / <alpha-value>)",
         success: "rgb(var(--success) / <alpha-value>)",
         warning: "rgb(var(--warning) / <alpha-value>)",
         danger: "rgb(var(--danger) / <alpha-value>)",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "var(--font-sans)", "serif"],
+        sans: ["Arial", "var(--font-arimo)", "Helvetica", "sans-serif"],
+        display: ['"Arial Black"', "var(--font-archivo)", '"Arial Bold"', "Arial", "sans-serif"],
       },
-      borderRadius: { xl: "0.875rem", "2xl": "1.25rem", "3xl": "1.75rem" },
+      // Square corners everywhere (Wix Harmony streetwear template); pills stay rounded-full.
+      borderRadius: { none: "0", sm: "0", DEFAULT: "0", md: "0", lg: "0", xl: "0", "2xl": "0", "3xl": "0", full: "9999px" },
       boxShadow: {
-        card: "0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px -12px rgb(0 0 0 / 0.12)",
-        lift: "0 2px 4px rgb(0 0 0 / 0.04), 0 24px 48px -16px rgb(0 0 0 / 0.22)",
+        card: "none",
+        lift: "0 12px 40px -12px rgb(0 0 0 / 0.25)",
       },
       keyframes: {
         shimmer: { "100%": { transform: "translateX(100%)" } },
         marquee: { from: { transform: "translateX(0)" }, to: { transform: "translateX(-50%)" } },
+        "slide-up": { from: { transform: "translateY(100%)" }, to: { transform: "translateY(0)" } },
       },
       animation: {
         shimmer: "shimmer 1.6s infinite",
         marquee: "marquee 40s linear infinite",
+        "slide-up": "slide-up 0.35s ease-out",
       },
     },
   },

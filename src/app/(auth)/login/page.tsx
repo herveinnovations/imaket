@@ -8,10 +8,10 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   const sp = await searchParams;
   return (
     <>
-      <h1 className="text-4xl font-bold">Welcome back</h1>
+      <h1 className="text-[2.4rem]">Log In</h1>
       <p className="mb-8 mt-2 text-muted">Log in to your store or your purchases.</p>
       <LoginForm next={sp.next} error={sp.error} />
-      <p className="mt-8 text-center text-sm text-muted">New to iMaket? <Link href="/register" className="font-medium text-brand hover:underline">Create an account</Link></p>
+      <p className="mt-8 text-center text-sm text-muted">New to iMaket? <Link href="/register" className="underline underline-offset-4">Create an account</Link></p>
     </>
   );
 }

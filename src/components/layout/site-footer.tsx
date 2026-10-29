@@ -1,36 +1,77 @@
 import Link from "next/link";
-import { Logo } from "./logo";
+import { LogoMark } from "./logo";
+import { NewsletterLink } from "@/components/marketing/newsletter";
+import { getSiteContent } from "@/lib/site-content";
 
-const COLS = [
-  { title: "Buy", links: [["/marketplace", "Marketplace"], ["/marketplace?type=course", "Courses"], ["/marketplace?type=ticket", "Events"], ["/dashboard/downloads", "Your purchases"]] },
-  { title: "Sell", links: [["/register?role=creator", "Open a store"], ["/#pricing", "Pricing"], ["/creator/affiliates", "Affiliates"], ["/creator/payouts", "Payouts"]] },
-  { title: "Company", links: [["/#", "About"], ["/#", "Help centre"], ["/#", "Terms"], ["/#", "Privacy"]] },
+const POLICIES: [string, string][] = [
+  ["/policies/refund", "Refund Policy"],
+  ["/policies/accessibility", "Accessibility Statement"],
+  ["/policies/terms", "Terms & Conditions"],
+  ["/policies/shipping", "Shipping Policy"],
+  ["/policies/privacy", "Privacy Policy"],
+];
+const SHOP: [string, string][] = [
+  ["/marketplace", "All Products"],
+  ["/marketplace?audience=men", "Men"],
+  ["/marketplace?audience=women", "Women"],
+  ["/marketplace?new=1", "New"],
+  ["/groups", "Groups"],
+  ["/members", "Members"],
 ];
 
-export function SiteFooter() {
+const link = "hover:underline hover:underline-offset-4";
+
+export async function SiteFooter() {
+  const c = await getSiteContent();
+  const socials = ([["Facebook", c.facebook], ["Tiktok", c.tiktok], ["Instagram", c.instagram]] as const).filter(([, url]) => url);
+
   return (
-    <footer className="mt-24 border-t bg-surface">
-      <div className="container grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
-        <div>
-          <Logo />
-          <p className="mt-4 max-w-xs text-sm leading-6 text-muted">
-            The storefront for African creators. Sell anything you make and get paid on mobile money, card or PayPal.
-          </p>
-          <p className="mt-4 text-sm text-muted">Made in Lusaka.</p>
+    <footer className="bg-lime text-black">
+      <div className="grid gap-x-6 gap-y-10 px-3 py-6 text-[17px] leading-[1.3] sm:grid-cols-3 sm:py-3 xl:text-[19px]">
+        {/* column 1 */}
+        <div className="flex min-h-full flex-col justify-between gap-10 sm:min-h-[520px]">
+          <div className="space-y-0">
+            {c.address && <p>{c.address}</p>}
+            <div className="mt-[3.2em]">
+              {c.phone && <p><a href={`tel:${c.phone.replace(/\s/g, "")}`} className={link}>{c.phone}</a></p>}
+              {c.email && <p><a href={`mailto:${c.email}`} className={link}>{c.email}</a></p>}
+            </div>
+          </div>
+          <ul className="space-y-0.5">
+            {POLICIES.map(([href, label]) => <li key={href}><Link href={href} className={link}>{label}</Link></li>)}
+          </ul>
         </div>
-        {COLS.map((c) => (
-          <div key={c.title}>
-            <h3 className="font-sans text-sm font-semibold tracking-normal">{c.title}</h3>
-            <ul className="mt-3 space-y-2 text-sm text-muted">
-              {c.links.map(([href, label]) => <li key={label}><Link href={href} className="hover:text-fg">{label}</Link></li>)}
+
+        {/* column 2 with the centred logo */}
+        <div className="relative flex flex-col justify-between gap-10 sm:min-h-[520px]">
+          <div>
+            <p className="mb-2">Our Store</p>
+            <ul className="space-y-0.5">
+              <li><Link href="/about" className={link}>About Us</Link></li>
+              <li><NewsletterLink className={link}>Subscribe</NewsletterLink></li>
+              <li><Link href="/faq" className={link}>FAQ</Link></li>
+              <li><Link href="/register?role=creator" className={link}>Sell on iMaket</Link></li>
             </ul>
           </div>
-        ))}
-      </div>
-      <div className="border-t">
-        <div className="container flex flex-col gap-2 py-5 text-xs text-muted sm:flex-row sm:justify-between">
-          <span>© 2026 iMaket</span>
-          <span>Payments by Flutterwave, DusuPay, Stripe and PayPal</span>
+          <Link href="/" aria-label="iMaket home" className="self-start sm:absolute sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
+            <LogoMark />
+          </Link>
+          <ul className="space-y-0.5">
+            {socials.length
+              ? socials.map(([label, url]) => <li key={label}><a href={url} target="_blank" rel="noopener noreferrer" className={link}>{label}</a></li>)
+              : <li className="opacity-0" aria-hidden>.</li>}
+          </ul>
+        </div>
+
+        {/* column 3 */}
+        <div className="flex flex-col justify-between gap-10 sm:min-h-[520px]">
+          <div>
+            <p className="mb-2">Shop</p>
+            <ul className="space-y-0.5 text-[16px] xl:text-[17px]">
+              {SHOP.map(([href, label]) => <li key={href}><Link href={href} className={link}>{label}</Link></li>)}
+            </ul>
+          </div>
+          <p className="max-w-[12rem]">© 2026 by iMaket. Powered and secured by <span className="underline underline-offset-2">HCA.</span></p>
         </div>
       </div>
     </footer>

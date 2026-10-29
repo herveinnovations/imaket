@@ -2,14 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Minus, Plus } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
+import { QtyStepper } from "./quick-view";
 import { WishlistButton } from "./wishlist-button";
 import { useCart } from "@/store/cart";
 import { formatMoney } from "@/lib/utils";
 import type { Product } from "@/lib/types";
 
+/** Price, quantity, green "Add to Cart" and outlined "Buy Now" (Wix product page). */
 export function PurchasePanel({ product: p }: { product: Product }) {
   const router = useRouter();
   const add = useCart((s) => s.add);
@@ -30,48 +30,49 @@ export function PurchasePanel({ product: p }: { product: Product }) {
     if (goToCheckout) {
       setOpen(false);
       router.push("/checkout");
-    } else {
-      toast.success("Added to cart");
     }
   }
 
   return (
-    <div className="space-y-4">
+    <div>
       {p.pay_what_you_want ? (
-        <div>
-          <label htmlFor="pwyw" className="label">Name your price</label>
+        <div className="mt-2">
+          <label htmlFor="pwyw" className="mb-1.5 block text-[15px]">Name your price</label>
           <div className="relative">
-            <input id="pwyw" inputMode="decimal" className="input h-14 pl-16 text-2xl font-semibold" value={custom}
+            <input id="pwyw" inputMode="decimal" className="h-11 w-full border border-black/60 pl-14 pr-3 text-lg" value={custom}
               onChange={(e) => setCustom(e.target.value.replace(/[^\d.]/g, ""))} aria-invalid={!!pwywError} aria-describedby="pwyw-hint" />
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted">{p.currency}</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm">{p.currency}</span>
           </div>
-          <p id="pwyw-hint" className={`mt-1.5 text-sm ${pwywError ? "text-danger" : "text-muted"}`}>
+          <p id="pwyw-hint" className={`mt-1.5 text-sm ${pwywError ? "text-danger" : ""}`}>
             {pwywError ?? `Minimum ${formatMoney(p.min_price ?? 0, p.currency)}. Suggested ${formatMoney(p.price, p.currency)}.`}
           </p>
         </div>
       ) : (
-        <p className="flex items-baseline gap-3">
-          <span className="font-display text-4xl font-bold tracking-tight">{formatMoney(p.price, p.currency)}</span>
-          {p.compare_at_price && <s className="text-lg text-muted">{formatMoney(p.compare_at_price, p.currency)}</s>}
+        <p className="text-[15px]">
+          <span className="sr-only">Price</span>
+          {p.compare_at_price && p.compare_at_price > p.price && <s className="mr-2 text-muted">{formatMoney(p.compare_at_price, p.currency)}</s>}
+          {formatMoney(p.price, p.currency)}
         </p>
       )}
 
       {multi && !soldOut && (
-        <div className="flex items-center gap-3">
-          <span className="text-sm font-medium">{p.type === "ticket" ? "Tickets" : "Quantity"}</span>
-          <div className="flex items-center rounded-xl border bg-surface">
-            <button className="p-2.5 text-muted hover:text-fg disabled:opacity-40" disabled={qty <= 1} onClick={() => setQty(qty - 1)} aria-label="Decrease"><Minus className="h-4 w-4" /></button>
-            <span className="w-8 text-center tabular-nums" aria-live="polite">{qty}</span>
-            <button className="p-2.5 text-muted hover:text-fg disabled:opacity-40" disabled={qty >= maxQty} onClick={() => setQty(qty + 1)} aria-label="Increase"><Plus className="h-4 w-4" /></button>
-          </div>
-        </div>
+        <fieldset className="mt-6">
+          <legend className="mb-1.5 text-[15px]">{p.type === "ticket" ? "Tickets" : "Quantity"}</legend>
+          <QtyStepper qty={qty} setQty={setQty} max={maxQty} />
+        </fieldset>
       )}
 
-      <div className="flex flex-col gap-2.5">
-        <Button size="lg" disabled={soldOut} onClick={() => addToCart(true)}>{soldOut ? "Sold out" : p.type === "ticket" ? "Get tickets" : "Buy now"}</Button>
-        <div className="grid grid-cols-[1fr_auto] gap-2.5">
-          <Button size="lg" variant="secondary" disabled={soldOut} onClick={() => addToCart(false)}>Add to cart</Button>
-          <WishlistButton productId={p.id} withLabel className="h-[52px]" />
+      <div className="mt-6 space-y-3">
+        <button disabled={soldOut} onClick={() => addToCart(false)}
+          className="h-10 w-full rounded-[20px] bg-brand text-base text-white hover:bg-[#006b20] disabled:opacity-50">
+          {soldOut ? "Out of Stock" : "Add to Cart"}
+        </button>
+        <div className="flex gap-3">
+          <button disabled={soldOut} onClick={() => addToCart(true)}
+            className="h-[42px] flex-1 rounded-[20px] border border-black text-base hover:bg-black hover:text-white disabled:opacity-50">
+            {p.type === "ticket" ? "Get Tickets" : "Buy Now"}
+          </button>
+          <WishlistButton productId={p.id} className="h-[42px] w-[42px] rounded-full border border-black" />
         </div>
       </div>
     </div>

@@ -68,6 +68,7 @@ export function CheckoutForm({
   const payload = (code?: string) => ({
     items: items.map((i) => ({ productId: i.productId, quantity: i.quantity, customPrice: i.customPrice })),
     couponCode: code,
+    email: /^\S+@\S+\.\S+$/.test(form.email.trim()) ? form.email.trim() : undefined,
   });
 
   // Server-priced quote whenever the cart or coupon changes

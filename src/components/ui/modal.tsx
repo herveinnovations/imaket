@@ -32,7 +32,7 @@ export function Modal({
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-          <motion.div className="absolute inset-0 bg-[#0D1220]/50 backdrop-blur-[2px]" onClick={onClose}
+          <motion.div className="absolute inset-0 bg-black/50" onClick={onClose}
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} />
           <motion.div
             ref={panel}

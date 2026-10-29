@@ -1,23 +1,29 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export function LogoMark({ className }: { className?: string }) {
-  // A lowercase "i" under a market-stall awning; the dot is the gold accent
+/** Oval outlined wordmark in the style of the Wix Harmony streetwear template. */
+export function LogoMark({ className, size = "md" }: { className?: string; size?: "sm" | "md" | "lg" }) {
   return (
-    <svg viewBox="0 0 32 32" className={cn("h-8 w-8", className)} aria-hidden>
-      <rect width="32" height="32" rx="9" fill="rgb(var(--brand))" />
-      <path d="M7 12.5 9.5 8h13L25 12.5" fill="none" stroke="rgb(var(--brand-fg))" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M16 16v8" fill="none" stroke="rgb(var(--brand-fg))" strokeWidth="3.4" strokeLinecap="round" />
-      <circle cx="16" cy="11.6" r="2.3" fill="#F2B21B" />
-    </svg>
+    <span
+      className={cn(
+        "inline-flex items-center justify-center rounded-[50%] border-[3px] border-black bg-transparent font-display leading-none text-black",
+        size === "sm" && "h-8 px-3 text-[15px] border-2",
+        size === "md" && "h-[42px] px-4 text-[21px]",
+        size === "lg" && "h-14 px-6 text-[28px]",
+        className,
+      )}
+      style={{ letterSpacing: "-0.06em" }}
+      aria-hidden
+    >
+      iMaket
+    </span>
   );
 }
 
-export function Logo({ className, href = "/" }: { className?: string; href?: string }) {
+export function Logo({ className, href = "/", size = "md" }: { className?: string; href?: string; size?: "sm" | "md" | "lg" }) {
   return (
-    <Link href={href} className={cn("flex items-center gap-2 rounded-lg", className)} aria-label="iMaket home">
-      <LogoMark />
-      <span className="font-display text-[1.35rem] font-bold tracking-tight">iMaket</span>
+    <Link href={href} className={cn("inline-flex items-center", className)} aria-label="iMaket home">
+      <LogoMark size={size} />
     </Link>
   );
 }

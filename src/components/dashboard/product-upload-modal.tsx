@@ -24,7 +24,7 @@ const TYPES: { type: ProductType; icon: React.ElementType; blurb: string }[] = [
 const STEPS = ["Type", "Details", "Price & delivery", "Review"];
 
 interface Draft {
-  type: ProductType; title: string; summary: string; description: string; category_id: string; cover_url: string | null;
+  type: ProductType; title: string; summary: string; description: string; category_id: string; audience: "" | "men" | "women" | "unisex"; cover_url: string | null;
   price: string; compare_at_price: string; pay_what_you_want: boolean; min_price: string;
   files: UploadedFile[]; download_limit: string;
   modules: { title: string; lessons: { title: string; is_preview: boolean }[] }[];
@@ -35,7 +35,7 @@ interface Draft {
 }
 
 const empty = (type: ProductType = "digital"): Draft => ({
-  type, title: "", summary: "", description: "", category_id: "", cover_url: null,
+  type, title: "", summary: "", description: "", category_id: "", audience: "", cover_url: null,
   price: "", compare_at_price: "", pay_what_you_want: false, min_price: "",
   files: [], download_limit: "5",
   modules: [{ title: "Getting started", lessons: [{ title: "Welcome", is_preview: true }] }],
@@ -47,7 +47,7 @@ const empty = (type: ProductType = "digital"): Draft => ({
 
 function fromProduct(p: Product): Draft {
   return {
-    ...empty(p.type), title: p.title, summary: p.summary ?? "", description: p.description ?? "", category_id: p.category_id ?? "",
+    ...empty(p.type), title: p.title, summary: p.summary ?? "", description: p.description ?? "", category_id: p.category_id ?? "", audience: p.audience ?? "",
     cover_url: p.cover_url, price: String(p.price), compare_at_price: p.compare_at_price ? String(p.compare_at_price) : "",
     pay_what_you_want: p.pay_what_you_want, min_price: p.min_price ? String(p.min_price) : "",
     download_limit: p.download_limit ? String(p.download_limit) : "", event_starts_at: p.event_starts_at?.slice(0, 16) ?? "",
@@ -106,7 +106,7 @@ export function ProductUploadModal({ open, onClose, categories, currency, produc
     setSaving(mode);
     const body = {
       type: d.type, title: d.title.trim(), summary: d.summary.trim(), description: d.description.trim() || null,
-      category_id: d.category_id || null, cover_url: d.cover_url, currency,
+      category_id: d.category_id || null, audience: d.audience || null, cover_url: d.cover_url, currency,
       price: Number(d.price), compare_at_price: num(d.compare_at_price),
       pay_what_you_want: d.pay_what_you_want, min_price: d.pay_what_you_want ? num(d.min_price) ?? 0 : null,
       download_limit: num(d.download_limit), files: d.files,
@@ -181,6 +181,13 @@ export function ProductUploadModal({ open, onClose, categories, currency, produc
                     {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
                   </Select>
                   <Input label="Tags" name="tags" value={d.tags} onChange={(e) => up({ tags: e.target.value })} placeholder="budget, excel, finance" hint="Comma separated, helps search" />
+                  <Select label="Shop collection" name="audience" value={d.audience} onChange={(e) => up({ audience: e.target.value as Draft["audience"] })}
+                    hint="Shows the product under Men or Women in the shop menu">
+                    <option value="">Not clothing / no collection</option>
+                    <option value="men">Men</option>
+                    <option value="women">Women</option>
+                    <option value="unisex">Unisex (Men and Women)</option>
+                  </Select>
                 </div>
               </div>
               <CoverUpload value={d.cover_url} onChange={(cover_url) => up({ cover_url })} />

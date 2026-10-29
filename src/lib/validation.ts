@@ -8,6 +8,7 @@ export const productSchema = z.object({
   summary: z.string().trim().max(180).nullish(),
   description: z.string().max(20_000).nullish(),
   category_id: z.string().uuid().nullish().or(z.literal("").transform(() => null)),
+  audience: z.enum(["men", "women", "unisex"]).nullish().or(z.literal("").transform(() => null)),
   cover_url: z.string().url().nullish(),
   gallery: z.array(z.string().url()).max(8).optional(),
   currency: z.string().length(3).optional(),
@@ -59,6 +60,7 @@ export const creatorProfileSchema = z.object({
   banner_url: z.string().url().nullish(),
   socials: z.record(z.enum(["instagram", "x", "tiktok", "youtube", "website", "whatsapp"]), z.string().max(200)).optional(),
   featured_product_ids: z.array(z.string()).max(4).optional(),
+  join_sitewide_sales: z.boolean().optional(),
   currency: z.string().length(3).optional(),
   payout_method: z.discriminatedUnion("type", [
     z.object({ type: z.literal("mobile_money"), network: z.string().min(2), number: z.string().regex(/^\+?\d{9,15}$/), name: z.string().min(2) }),

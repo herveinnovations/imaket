@@ -19,4 +19,13 @@ c = priceCart([{ product: { ...p1, pay_what_you_want: true, min_price: 60 }, qua
 c = priceCart([{ product: p1, quantity: 1 }], { feePercent: 5, coupon: { ...coupon, type: "fixed", value: 500 } }); assert.equal(c.total, 0);
 c = priceCart([{ product: p1, quantity: 1 }], { feePercent: 5, coupon: { ...coupon, ends_at: "2020-01-01" } }); assert.match(c.errors[0], /expired/);
 c = priceCart([{ product: p1, quantity: 1 }, { product: { ...p3, currency: "NGN" }, quantity: 1 }], { feePercent: 5 }); assert.match(c.errors[0], /currencies/);
+// sitewide code (creator_id null): applies to every store taking part
+const site = { ...coupon, creator_id: null, code: "TEES25", value: 25 } as const;
+c = priceCart([{ product: p1, quantity: 1 }, { product: p3, quantity: 1 }], { feePercent: 5, coupon: site });
+assert.equal(c.discount_total, 0.25 * 250); assert.ok(c.coupon_applied);
+c = priceCart([{ product: p1, quantity: 1 }, { product: p3, quantity: 1 }], { feePercent: 5, coupon: site, sitewideCreatorIds: ["B"] });
+assert.equal(c.lines[0].discount, 0); assert.equal(c.lines[1].discount, 25);       // store A opted out
+assert.equal(c.lines[1].creator_earnings, 75 - 3.75);                            // fee on discounted price
+c = priceCart([{ product: p1, quantity: 1 }], { feePercent: 5, coupon: site, sitewideCreatorIds: [] });
+assert.match(c.errors[0], /doesn't apply/);
 console.log("ALL PRICING TESTS PASSED");

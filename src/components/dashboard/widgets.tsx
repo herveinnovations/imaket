@@ -5,8 +5,8 @@ export function PageHeader({ title, description, actions }: { title: string; des
   return (
     <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <h1 className="text-3xl font-bold sm:text-[2.1rem]">{title}</h1>
-        {description && <p className="mt-1.5 text-muted">{description}</p>}
+        <h1 className="text-[2rem] sm:text-[2.3rem]">{title}</h1>
+        {description && <p className="mt-1.5 text-[15px]">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
     </div>
@@ -16,13 +16,13 @@ export function PageHeader({ title, description, actions }: { title: string; des
 export function StatCard({ label, value, change, hint, emphasis }: { label: string; value: string; change?: number; hint?: string; emphasis?: boolean }) {
   const up = (change ?? 0) >= 0;
   return (
-    <div className={cn("rounded-2xl border p-5", emphasis ? "border-transparent bg-[#161A33] text-white dark:bg-brand-soft dark:text-fg" : "bg-surface")}>
-      <p className={cn("text-sm", emphasis ? "text-white/70 dark:text-muted" : "text-muted")}>{label}</p>
-      <p className="mt-2 font-display text-[1.9rem] font-bold leading-none tracking-tight tabular-nums">{value}</p>
+    <div className={cn("border p-5", emphasis ? "border-black bg-black text-lime" : "border-black/20 bg-lime/0")}>
+      <p className={cn("text-sm", emphasis ? "text-white" : "")}>{label}</p>
+      <p className="mt-2 font-display text-[1.9rem] leading-none tabular-nums">{value}</p>
       {(change != null || hint) && (
-        <p className={cn("mt-3 flex items-center gap-1 text-sm", emphasis ? "text-white/70 dark:text-muted" : "text-muted")}>
+        <p className={cn("mt-3 flex items-center gap-1 text-sm", emphasis ? "text-white" : "text-muted")}>
           {change != null && (
-            <span className={cn("inline-flex items-center font-medium", up ? (emphasis ? "text-[#6EE7B7] dark:text-success" : "text-success") : "text-danger")}>
+            <span className={cn("inline-flex items-center font-medium", up ? (emphasis ? "text-lime" : "text-success") : "text-danger")}>
               {up ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
               {Math.abs(change).toFixed(1)}%
             </span>

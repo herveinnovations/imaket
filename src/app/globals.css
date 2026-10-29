@@ -3,50 +3,39 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --bg: 243 245 242;
+  :root, .dark {
+    /* iMaket × Wix Harmony streetwear palette */
+    --bg: 255 255 255;
     --surface: 255 255 255;
-    --surface-2: 235 239 234;
-    --border: 220 225 218;
-    --fg: 22 26 51;
-    --muted: 92 99 122;
-    --brand: 11 122 86;
+    --surface-2: 230 230 230;      /* #E6E6E6 panels behind photos */
+    --stone: 230 231 218;          /* #E6E7DA */
+    --border: 0 0 0;
+    --fg: 0 0 0;
+    --muted: 82 82 82;
+    --brand: 0 133 40;             /* #008528 green buttons */
     --brand-fg: 255 255 255;
-    --brand-soft: 218 238 228;
-    --accent: 242 178 27;
-    --success: 21 128 61;
-    --warning: 180 83 9;
-    --danger: 214 56 62;
+    --brand-soft: 236 255 166;     /* pale lime for selected states */
+    --lime: 214 255 56;            /* #D6FF38 header, footer, promo */
+    --accent: 214 255 56;
+    --success: 0 133 40;
+    --warning: 161 98 7;
+    --danger: 204 24 24;
     color-scheme: light;
   }
-  .dark {
-    --bg: 13 18 32;
-    --surface: 20 26 44;
-    --surface-2: 28 35 58;
-    --border: 42 50 78;
-    --fg: 236 239 245;
-    --muted: 150 158 184;
-    --brand: 56 201 148;
-    --brand-fg: 6 30 22;
-    --brand-soft: 20 52 48;
-    --accent: 245 196 70;
-    --success: 74 222 128;
-    --warning: 251 191 36;
-    --danger: 248 113 113;
-    color-scheme: dark;
-  }
 
-  * { @apply border-border; }
+  * { @apply border-border/15; }
   html { -webkit-tap-highlight-color: transparent; }
   body {
     @apply bg-bg text-fg font-sans antialiased;
-    font-feature-settings: "ss01", "cv11";
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3 { @apply font-display; }
-  h1, h2, h3, .font-display { font-optical-sizing: auto; letter-spacing: -0.025em; }
-  :focus-visible { @apply outline-none ring-2 ring-brand ring-offset-2 ring-offset-bg; }
-  ::selection { background: rgb(var(--accent) / 0.45); }
+  /* Arial Black headlines with the template's tight tracking (-0.05em) */
+  h1, h2, h3 { @apply font-display font-normal; }
+  h1, h2, h3, .font-display { letter-spacing: -0.05em; line-height: 1.1; }
+  /* Arial Black has a single weight: never let utilities fake a heavier bold */
+  .font-display, h1:not(.font-sans), h2:not(.font-sans), h3:not(.font-sans) { font-weight: 400 !important; }
+  :focus-visible { @apply outline-none ring-2 ring-fg ring-offset-2 ring-offset-bg; }
+  ::selection { background: rgb(var(--lime)); color: #000; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -54,12 +43,14 @@
 }
 
 @layer components {
-  .card { @apply rounded-2xl border bg-surface; }
+  .card { @apply border border-fg/15 bg-surface; }
   .input {
-    @apply h-11 w-full rounded-xl border bg-surface px-3.5 text-[15px] text-fg placeholder:text-muted/70
-           transition-colors focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/15
+    @apply h-11 w-full border border-fg/60 bg-surface px-3.5 text-[15px] text-fg placeholder:text-muted/80
+           transition-colors focus:border-fg focus:outline-none focus:ring-1 focus:ring-fg
            disabled:cursor-not-allowed disabled:opacity-60;
   }
+  .wix-h { @apply font-display text-[1.85rem] leading-[1.1] tracking-[-0.05em] sm:text-[2.05rem]; }
+  .wix-link { @apply underline-offset-4 hover:underline; }
   .label { @apply mb-1.5 block text-sm font-medium text-fg; }
   .prose-sk { @apply max-w-[68ch] text-[15.5px] leading-7 text-fg/90; }
   .prose-sk p { @apply mb-4; }

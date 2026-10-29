@@ -4,10 +4,12 @@ import { isDemoMode, env } from "@/lib/env";
 import { priceCart, type PricingCoupon } from "@/lib/pricing";
 import { DEMO_COUPONS, DEMO_PRODUCTS } from "@/lib/demo-data";
 import { quoteCart } from "@/lib/orders";
+import { getApiSession } from "@/lib/auth";
 
 const schema = z.object({
   items: z.array(z.object({ productId: z.string(), quantity: z.number().int().min(1).max(50), customPrice: z.number().nonnegative().optional() })).min(1).max(25),
   couponCode: z.string().max(40).optional(),
+  email: z.string().email().max(254).optional(),
 });
 
 /** POST /api/checkout/quote — authoritative server-side totals for the cart. */
@@ -29,7 +31,8 @@ export async function POST(req: Request) {
   }
 
   try {
-    const { priced } = await quoteCart(body.data);
+    const session = await getApiSession();
+    const { priced } = await quoteCart({ ...body.data, customerId: session && !session.demo ? session.user.id : null });
     return ok(priced);
   } catch (e) {
     console.error("[quote]", e);

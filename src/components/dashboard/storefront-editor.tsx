@@ -5,20 +5,21 @@ import { useState } from "react";
 import { BadgeCheck } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Avatar, Input, Textarea } from "@/components/ui/primitives";
+import { Avatar, Input, Switch, Textarea } from "@/components/ui/primitives";
 import { CoverUpload } from "./file-upload";
 import { cn, siteHost } from "@/lib/utils";
 import type { Creator, Product } from "@/lib/types";
 
-const SWATCHES = ["#0B7A56", "#1E3A8A", "#6D28D9", "#9D174D", "#B45309", "#0F766E", "#C2410C", "#161A33"];
+const SWATCHES = ["#D6FF38", "#000000", "#008528", "#E6E6E6", "#E6E7DA", "#1E3A8A", "#9D174D", "#C2410C"];
 
 export function StorefrontEditor({ creator, products }: { creator: Creator; products: Product[] }) {
   const router = useRouter();
   const [s, setS] = useState({
     store_name: creator.store_name, handle: creator.handle, tagline: creator.tagline ?? "", bio: creator.bio ?? "",
-    brand_color: creator.brand_color ?? "#0B7A56", avatar_url: creator.avatar_url, banner_url: creator.banner_url,
+    brand_color: creator.brand_color ?? "#D6FF38", avatar_url: creator.avatar_url, banner_url: creator.banner_url,
     socials: { instagram: "", tiktok: "", x: "", youtube: "", website: "", whatsapp: "", ...creator.socials },
     featured_product_ids: creator.featured_product_ids ?? [],
+    join_sitewide_sales: creator.join_sitewide_sales ?? true,
   });
   const [busy, setBusy] = useState(false);
   const up = (p: Partial<typeof s>) => setS((x) => ({ ...x, ...p }));
@@ -111,6 +112,10 @@ export function StorefrontEditor({ creator, products }: { creator: Creator; prod
           </ul>
         </section>
 
+        <section className="card p-6">
+          <Switch label="Take part in sitewide sales" checked={s.join_sitewide_sales} onChange={(v) => up({ join_sitewide_sales: v })}
+            description="iMaket's sitewide codes (like TEES25 or the 10% newsletter welcome code) discount your products too. The discount comes off the sale price, so your earnings are lower on those orders. Turn off to exclude your store." />
+        </section>
         <Button type="submit" size="lg" loading={busy}>Save store</Button>
       </div>
 

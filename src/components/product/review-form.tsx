@@ -35,7 +35,7 @@ export function ReviewForm({ productId }: { productId: string }) {
         {[1, 2, 3, 4, 5].map((n) => (
           <button key={n} type="button" role="radio" aria-checked={rating === n} aria-label={`${n} star${n > 1 ? "s" : ""}`}
             onClick={() => setRating(n)} onMouseEnter={() => setHover(n)} className="rounded p-0.5">
-            <Star className={cn("h-7 w-7", (hover || rating) >= n ? "fill-accent text-accent" : "text-fg/25")} />
+            <Star className={cn("h-7 w-7", (hover || rating) >= n ? "fill-black text-black" : "text-fg/25")} />
           </button>
         ))}
       </div>

@@ -182,14 +182,14 @@ export const DEMO_PRODUCTS: Product[] = ([
     tags: ["journal", "ebook", "habits"],
   },
   {
-    id: "p-chitenge-tote", creator_id: "cr-mwila", category_id: "cat-fashion", type: "physical",
+    id: "p-chitenge-tote", creator_id: "cr-mwila", category_id: "cat-fashion", type: "physical", audience: "unisex",
     title: "Chitenge Weekender Tote", price: 480, currency: "ZMW", requires_shipping: true, shipping_fee: 60,
     track_inventory: true, inventory_qty: 14, featured: true,
     summary: "Lined canvas tote with a chitenge outer and leather handles. Fits a 15\" laptop.",
     tags: ["chitenge", "bag", "handmade"],
   },
   {
-    id: "p-chitenge-bomber", creator_id: "cr-mwila", category_id: "cat-fashion", type: "physical",
+    id: "p-chitenge-bomber", creator_id: "cr-mwila", category_id: "cat-fashion", type: "physical", audience: "men",
     title: "Kitwe Bomber Jacket", price: 1250, currency: "ZMW", requires_shipping: true, shipping_fee: 60,
     track_inventory: true, inventory_qty: 3,
     summary: "Reversible bomber: black twill on one side, chitenge on the other.",
@@ -338,6 +338,9 @@ export const DEMO_COUPONS: Coupon[] = [
   { id: "cp1", creator_id: "cr-mutale", code: "MONTHEND", type: "percent", value: 20, min_order: 0, max_uses: 100, used_count: 41, starts_at: null, ends_at: daysAgo(-14), active: true },
   { id: "cp2", creator_id: "cr-mutale", code: "UNZA50", type: "fixed", value: 50, min_order: 150, max_uses: null, used_count: 112, starts_at: null, ends_at: null, active: true },
   { id: "cp3", creator_id: "cr-mutale", code: "LAUNCH", type: "percent", value: 35, min_order: 0, max_uses: 50, used_count: 50, starts_at: null, ends_at: daysAgo(30), active: false },
+  // sitewide codes (creator_id null), as on the iMaket Wix site
+  { id: "pc1", creator_id: null, code: "TEES25", type: "percent", value: 25, min_order: 0, max_uses: null, used_count: 0, starts_at: null, ends_at: null, active: true },
+  { id: "pc2", creator_id: null, code: "WELCOME10", type: "percent", value: 10, min_order: 0, max_uses: null, used_count: 0, starts_at: null, ends_at: null, active: true },
 ];
 
 export const DEMO_PAYOUTS: Payout[] = [

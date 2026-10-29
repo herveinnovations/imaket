@@ -4,8 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Input, Select } from "@/components/ui/primitives";
-import { ThemeSelect } from "@/components/layout/theme-toggle";
+import { Input, Select, Switch, Textarea } from "@/components/ui/primitives";
 import type { AppUser } from "@/lib/types";
 import { siteHost } from "@/lib/utils";
 
@@ -32,6 +31,7 @@ export function AccountSettings({ user, isCreator }: { user: AppUser; isCreator:
   const [email, setEmail] = useState(user.email);
   const [pw, setPw] = useState({ password: "", confirm: "" });
   const [handle, setHandle] = useState("");
+  const [community, setCommunity] = useState({ public_profile: user.public_profile ?? true, bio: user.bio ?? "" });
 
   return (
     <div className="max-w-2xl space-y-6">
@@ -67,17 +67,21 @@ export function AccountSettings({ user, isCreator }: { user: AppUser; isCreator:
         <Button type="submit" variant="secondary" loading={busy === "pw"}>Update password</Button>
       </form>
 
-      <section className="card space-y-3 p-6">
-        <h2 className="font-sans text-base font-semibold tracking-normal">Appearance</h2>
-        <ThemeSelect />
-      </section>
+      <form onSubmit={run("community", () => send("/api/account", { public_profile: community.public_profile, bio: community.bio.trim() || null }), "Community settings saved")} className="card space-y-4 p-6">
+        <h2 className="font-sans text-base font-semibold tracking-normal">Community</h2>
+        <Switch label="Show me in the member directory" checked={community.public_profile}
+          description="Signed-in members can see your name, photo and bio on the Members page and follow you."
+          onChange={(v) => setCommunity({ ...community, public_profile: v })} />
+        <Textarea label="Short bio" name="bio" rows={2} maxLength={300} value={community.bio} onChange={(e) => setCommunity({ ...community, bio: e.target.value })} hint="Up to 300 characters" />
+        <Button type="submit" variant="secondary" loading={busy === "community"}>Save community settings</Button>
+      </form>
 
       {!isCreator && (
         <form id="sell" onSubmit={run("sell", async () => { await send("/api/creator/become", { handle }, "POST"); router.push("/creator"); }, "Your store is ready")}
-          className="card scroll-mt-24 space-y-4 border-brand/40 bg-brand-soft/30 p-6">
+          className="card scroll-mt-24 space-y-4 border-black bg-lime p-6">
           <h2 className="font-sans text-base font-semibold tracking-normal">Start selling</h2>
           <p className="text-sm text-muted">Open a store on this account. It&apos;s free; you pay 5% only when you sell.</p>
-          <div className="flex items-center rounded-xl border bg-surface focus-within:border-brand">
+          <div className="flex items-center border border-black bg-white">
             <span className="pl-3.5 text-[15px] text-muted">{siteHost()}/</span>
             <input value={handle} onChange={(e) => setHandle(e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, ""))} placeholder="yourname" aria-label="Store link" className="h-11 min-w-0 flex-1 bg-transparent pr-3 outline-none" />
           </div>

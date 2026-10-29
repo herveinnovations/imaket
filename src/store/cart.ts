@@ -18,6 +18,7 @@ export interface CartItem {
   requiresShipping: boolean;
   shippingFee: number;
   maxQty?: number | null;
+  coverUrl?: string | null;
 }
 
 interface CartState {
@@ -59,6 +60,7 @@ export const useCart = create<CartState>()(
                 quantity: MULTI.has(p.type) ? opts?.quantity ?? 1 : 1, customPrice: opts?.customPrice,
                 requiresShipping: p.requires_shipping, shippingFee: p.shipping_fee,
                 maxQty: p.track_inventory ? p.inventory_qty : null,
+                coverUrl: p.cover_url,
               },
             ],
           };

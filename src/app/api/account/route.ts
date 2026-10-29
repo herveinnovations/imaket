@@ -9,6 +9,8 @@ const schema = z.object({
   phone: z.string().max(30).optional(),
   country: z.string().length(2).optional(),
   avatar_url: z.string().url().nullish(),
+  public_profile: z.boolean().optional(),
+  bio: z.string().trim().max(300).nullish(),
   email: z.string().email().optional(),
   password: z.string().min(8).regex(/\d/, "Include a number").optional(),
 });

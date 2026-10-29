@@ -23,11 +23,11 @@ export default async function PayoutsPage() {
     <>
       <PageHeader title="Payouts" description={`Sales clear after ${hold} days, then you can withdraw to mobile money or your bank.`} />
 
-      <section className="mb-6 grid overflow-hidden rounded-3xl bg-[#161A33] text-white md:grid-cols-[1.3fr_1fr_1fr_1fr]">
+      <section className="mb-6 grid overflow-hidden bg-black text-white md:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div className="p-6 sm:p-8">
           <p className="text-sm text-white/70">Available to withdraw</p>
           <p className="mt-2 font-display text-5xl font-bold tracking-tight tabular-nums">{formatMoney(b.available, cur)}</p>
-          <div className="mt-6 [&_button]:bg-accent [&_button]:text-[#1d1500]"><RequestPayout available={b.available} currency={cur} min={min} method={method} /></div>
+          <div className="mt-6 [&_button]:bg-lime [&_button]:text-black"><RequestPayout available={b.available} currency={cur} min={min} method={method} /></div>
         </div>
         {[["Clearing", b.pending, `Available within ${hold} days`], ["Paid out", b.paid_out, "All time"], ["Lifetime earnings", b.lifetime, "After fees"]].map(([l, v, h]) => (
           <div key={l as string} className="border-t border-white/10 p-6 md:border-l md:border-t-0 sm:p-8">

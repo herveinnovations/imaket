@@ -23,6 +23,8 @@ export async function getProducts(f: ProductFilters = {}): Promise<{ items: Prod
     if (f.creatorId) items = items.filter((p) => p.creator_id === f.creatorId);
     if (f.category) items = items.filter((p) => p.category?.slug === f.category);
     if (f.type) items = items.filter((p) => p.type === f.type);
+    if (f.audience) items = items.filter((p) => p.audience === f.audience || p.audience === "unisex");
+    if (f.isNew) items = items.filter((p) => p.published_at && Date.now() - new Date(p.published_at).getTime() < 30 * 864e5);
     if (f.q) {
       const q = f.q.toLowerCase();
       items = items.filter((p) =>
@@ -42,6 +44,8 @@ export async function getProducts(f: ProductFilters = {}): Promise<{ items: Prod
     .eq("creator.status", "active");
   if (f.creatorId) q = q.eq("creator_id", f.creatorId);
   if (f.type) q = q.eq("type", f.type);
+  if (f.audience) q = q.in("audience", [f.audience, "unisex"]);
+  if (f.isNew) q = q.gte("published_at", new Date(Date.now() - 30 * 864e5).toISOString());
   if (f.category) {
     const { data: cat } = await supabase.from("imaket_categories").select("id").eq("slug", f.category).maybeSingle();
     if (cat) q = q.eq("category_id", cat.id);

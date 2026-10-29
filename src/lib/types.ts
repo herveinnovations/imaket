@@ -21,6 +21,8 @@ export interface AppUser {
   country?: string | null;
   role: UserRole;
   is_banned?: boolean;
+  public_profile?: boolean;
+  bio?: string | null;
   created_at: string;
 }
 
@@ -49,6 +51,7 @@ export interface Creator {
   status: CreatorStatus;
   verified: boolean;
   featured_product_ids: string[];
+  join_sitewide_sales?: boolean;
   payout_method?: PayoutMethod | null;
   created_at: string;
   // computed (demo / joins)
@@ -103,6 +106,9 @@ export interface Product {
   sales_count: number;
   view_count: number;
   rejection_reason: string | null;
+  audience?: "men" | "women" | "unisex" | null;
+  refund?: string | null;
+  delivery?: string | null;
   published_at: string | null;
   created_at: string;
   // joins
@@ -203,7 +209,7 @@ export interface Review {
 
 export interface Coupon {
   id: string;
-  creator_id: string;
+  creator_id: string | null;
   code: string;
   type: CouponType;
   value: number;
@@ -262,6 +268,10 @@ export interface ProductFilters {
   minPrice?: number;
   maxPrice?: number;
   sort?: "popular" | "newest" | "price_asc" | "price_desc" | "rating";
+  /** Men / Women collections (unisex items show in both) */
+  audience?: "men" | "women";
+  /** "New" collection: published in the last 30 days */
+  isNew?: boolean;
   creatorId?: string;
   page?: number;
   pageSize?: number;

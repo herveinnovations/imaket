@@ -6,10 +6,10 @@ import { Toaster } from "sonner";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <ThemeProvider attribute="class" forcedTheme="light" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
       <MotionConfig reducedMotion="user">
         {children}
-        <Toaster position="top-center" richColors closeButton toastOptions={{ className: "font-sans" }} />
+        <Toaster position="top-center" closeButton toastOptions={{ className: "font-sans !rounded-none !border-black" }} />
       </MotionConfig>
     </ThemeProvider>
   );

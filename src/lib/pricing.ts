@@ -23,7 +23,8 @@ export interface PricingProduct {
 
 export interface PricingCoupon {
   id: string;
-  creator_id: string;
+  /** null = sitewide code (admin-created); applies to stores in `sitewideCreatorIds` */
+  creator_id: string | null;
   code: string;
   type: "percent" | "fixed";
   value: number;
@@ -87,6 +88,8 @@ export function priceCart(
     feePercent: number;
     coupon?: PricingCoupon | null;
     affiliate?: { creator_id: string; commission_percent: number } | null;
+    /** For sitewide codes: stores taking part in sitewide sales (default: all) */
+    sitewideCreatorIds?: string[];
     now?: Date;
   },
 ): PricedCart {
@@ -119,12 +122,15 @@ export function priceCart(
     };
   });
 
-  // 2. coupon (scoped to one creator, optionally to specific products)
+  // 2. coupon: a store code (one creator, optionally specific products) or a sitewide code
   let couponApplied = false;
   const c = opts.coupon;
   if (c) {
     const problem = couponProblem(c, opts.now);
-    const eligible = lines.filter((l) => l.creator_id === c.creator_id && (!c.product_ids?.length || c.product_ids.includes(l.product_id)));
+    const inScope = (creatorId: string) => c.creator_id
+      ? creatorId === c.creator_id
+      : !opts.sitewideCreatorIds || opts.sitewideCreatorIds.includes(creatorId);
+    const eligible = lines.filter((l) => inScope(l.creator_id) && (!c.product_ids?.length || c.product_ids.includes(l.product_id)));
     const eligibleSubtotal = eligible.reduce((s, l) => s + l.line_total, 0);
     if (problem) errors.push(problem);
     else if (!eligible.length) errors.push("This code doesn't apply to the items in your cart.");

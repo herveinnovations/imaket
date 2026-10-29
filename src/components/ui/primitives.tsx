@@ -4,11 +4,11 @@ import { cn, initials } from "@/lib/utils";
 // ─── Badge ───────────────────────────────────────────────────────────
 const tones = {
   neutral: "bg-surface-2 text-fg/80",
-  brand: "bg-brand-soft text-brand",
+  brand: "bg-lime text-black",
   success: "bg-[rgb(var(--success)/0.12)] text-success",
   warning: "bg-[rgb(var(--warning)/0.14)] text-warning",
   danger: "bg-[rgb(var(--danger)/0.12)] text-danger",
-  accent: "bg-accent/20 text-fg",
+  accent: "bg-lime text-black",
 } as const;
 
 export function Badge({ tone = "neutral", className, children }: { tone?: keyof typeof tones; className?: string; children: React.ReactNode }) {
@@ -41,8 +41,8 @@ export function Skeleton({ className }: { className?: string }) {
 export function Avatar({ name, src, color, size = 40, className }: { name?: string | null; src?: string | null; color?: string | null; size?: number; className?: string }) {
   return (
     <span
-      className={cn("inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-display font-semibold text-white", className)}
-      style={{ width: size, height: size, fontSize: size * 0.38, background: color ?? "rgb(var(--brand))" }}
+      className={cn("inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-sans font-bold text-white", className)}
+      style={{ width: size, height: size, fontSize: size * 0.38, background: color ?? "#000" }}
       aria-hidden={!name}
     >
       {src
@@ -108,7 +108,7 @@ export function Switch({ checked, onChange, label, description }: { checked: boo
       </span>
       <button
         type="button" role="switch" aria-checked={checked} onClick={() => onChange(!checked)}
-        className={cn("relative mt-0.5 h-6 w-11 shrink-0 rounded-full transition-colors", checked ? "bg-brand" : "bg-fg/20")}
+        className={cn("relative mt-0.5 h-6 w-11 shrink-0 rounded-full transition-colors", checked ? "bg-black" : "bg-fg/20")}
       >
         <span className={cn("absolute left-0 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform", checked ? "translate-x-[22px]" : "translate-x-0.5")} />
       </button>
@@ -119,9 +119,9 @@ export function Switch({ checked, onChange, label, description }: { checked: boo
 // ─── Empty state ─────────────────────────────────────────────────────
 export function EmptyState({ icon: Icon, title, body, action }: { icon: React.ElementType; title: string; body?: string; action?: React.ReactNode }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed px-6 py-14 text-center">
-      <span className="mb-4 grid h-12 w-12 place-items-center rounded-2xl bg-brand-soft text-brand"><Icon className="h-6 w-6" /></span>
-      <h3 className="text-lg font-semibold">{title}</h3>
+    <div className="flex flex-col items-center justify-center border border-fg/20 px-6 py-14 text-center">
+      <span className="mb-4 grid h-12 w-12 place-items-center rounded-full bg-lime text-black"><Icon className="h-6 w-6" /></span>
+      <h3 className="font-display text-xl">{title}</h3>
       {body && <p className="mt-1 max-w-sm text-sm text-muted">{body}</p>}
       {action && <div className="mt-5">{action}</div>}
     </div>

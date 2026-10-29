@@ -12,7 +12,7 @@ function FormError({ state }: { state: AuthState }) {
   if (!state?.error && !state?.success) return null;
   return (
     <p role={state.error ? "alert" : "status"}
-      className={cn("rounded-xl p-3 text-sm", state.error ? "bg-[rgb(var(--danger)/0.1)] text-danger" : "bg-brand-soft text-brand")}>
+      className={cn("rounded-xl p-3 text-sm", state.error ? "bg-[rgb(var(--danger)/0.1)] text-danger" : "bg-lime text-black")}>
       {state.error ?? state.success}
     </p>
   );
@@ -42,7 +42,7 @@ export function LoginForm({ next, error }: { next?: string; error?: string }) {
       <input type="hidden" name="next" value={next ?? ""} />
       <Input label="Email" name="email" type="email" autoComplete="email" required defaultValue={state?.fields?.email} />
       <PasswordInput autoComplete="current-password" />
-      <div className="flex justify-end -mt-2"><Link href="/forgot-password" className="text-sm text-brand hover:underline">Forgot password?</Link></div>
+      <div className="flex justify-end -mt-2"><Link href="/forgot-password" className="text-sm underline underline-offset-4">Forgot password?</Link></div>
       <Button type="submit" size="lg" className="w-full" loading={pending}>Log in</Button>
     </form>
   );
@@ -60,7 +60,7 @@ export function RegisterForm({ defaultRole }: { defaultRole: "creator" | "custom
         <div className="grid grid-cols-2 gap-2">
           {([["creator", "Sell", Store], ["customer", "Buy", ShoppingBag]] as const).map(([r, label, I]) => (
             <label key={r} className={cn("flex cursor-pointer items-center gap-2.5 rounded-xl border p-3.5 text-sm font-medium transition-colors",
-              role === r ? "border-brand bg-brand-soft text-brand" : "bg-surface hover:border-fg/30")}>
+              role === r ? "border-black bg-lime text-black" : "bg-surface hover:border-black")}>
               <input type="radio" name="role" value={r} checked={role === r} onChange={() => setRole(r)} className="sr-only" />
               <I className="h-4 w-4" /> {label}
             </label>

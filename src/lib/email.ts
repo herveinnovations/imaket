@@ -23,16 +23,16 @@ export async function sendEmail(to: string, subject: string, html: string) {
   return res.ok ? await res.json() : null;
 }
 
-const shell = (title: string, body: string) => `<!doctype html><html><body style="margin:0;background:#F3F5F2;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#161A33">
+const shell = (title: string, body: string) => `<!doctype html><html><body style="margin:0;background:#FFFFFF;font-family:Arial,Helvetica,sans-serif;color:#000000">
 <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:32px 12px">
 <table width="100%" style="max-width:520px;background:#fff;border-radius:16px;padding:28px" cellpadding="0" cellspacing="0">
-<tr><td style="font-size:20px;font-weight:700;color:#0B7A56;padding-bottom:20px">${env.appName}</td></tr>
+<tr><td style="padding-bottom:20px"><span style="display:inline-block;border:3px solid #000;border-radius:50%;padding:6px 16px;font-family:\'Arial Black\',Arial,sans-serif;font-size:20px;letter-spacing:-1px;background:#D6FF38">${env.appName}</span></td></tr>
 <tr><td><h1 style="font-size:22px;margin:0 0 12px">${title}</h1>${body}</td></tr>
 <tr><td style="padding-top:28px;font-size:12px;color:#6B7280">You received this because of activity on ${env.appName}.</td></tr>
 </table></td></tr></table></body></html>`;
 
 const button = (href: string, label: string) =>
-  `<a href="${href}" style="display:inline-block;background:#0B7A56;color:#fff;padding:12px 20px;border-radius:10px;text-decoration:none;font-weight:600">${label}</a>`;
+  `<a href="${href}" style="display:inline-block;background:#008528;color:#fff;padding:12px 24px;border-radius:999px;text-decoration:none">${label}</a>`;
 
 export const emails = {
   orderReceipt(o: { orderNumber: string; total: number; currency: string; items: { title: string; line_total: number }[]; accessUrl: string }) {
@@ -49,7 +49,7 @@ export const emails = {
     return {
       subject: `New sale: ${s.title}`,
       html: shell("You made a sale", `<p><strong>${s.buyer}</strong> bought <strong>${s.title}</strong>.</p>
-        <p style="font-size:28px;font-weight:700;color:#0B7A56;margin:12px 0">+${formatMoney(s.earnings, s.currency)}</p>
+        <p style="font-size:28px;font-family:\'Arial Black\',Arial,sans-serif;color:#000;margin:12px 0">+${formatMoney(s.earnings, s.currency)}</p>
         ${button(`${env.appUrl}/creator/orders`, "View order")}`),
     };
   },

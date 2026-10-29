@@ -3,20 +3,22 @@ import { forwardRef } from "react";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// Wix Harmony buttons: green pill (primary), black-outline pill (secondary), black / lime solids.
 const variants = {
-  primary: "bg-brand text-brand-fg hover:bg-brand/90 shadow-[inset_0_1px_0_rgb(255_255_255/0.15)]",
-  secondary: "bg-surface text-fg border hover:bg-surface-2",
+  primary: "bg-brand text-brand-fg hover:bg-[#006b20]",
+  secondary: "bg-surface text-fg border border-fg hover:bg-fg hover:text-bg",
   ghost: "text-fg hover:bg-surface-2",
-  accent: "bg-accent text-[#1d1500] hover:brightness-95",
+  accent: "bg-lime text-black hover:bg-black hover:text-lime",
+  black: "bg-black text-white hover:bg-black/85",
   danger: "bg-danger text-white hover:bg-danger/90",
-  outline: "border border-fg/15 text-fg hover:border-fg/40",
+  outline: "border border-fg text-fg hover:bg-fg hover:text-bg",
 } as const;
 
 const sizes = {
-  sm: "h-9 px-3 text-sm gap-1.5 rounded-lg",
-  md: "h-11 px-5 text-[15px] gap-2 rounded-xl",
-  lg: "h-[52px] px-6 text-base gap-2 rounded-xl",
-  icon: "h-10 w-10 rounded-xl",
+  sm: "h-9 px-4 text-sm gap-1.5 rounded-full",
+  md: "h-10 px-5 text-base gap-2 rounded-full",
+  lg: "h-12 px-7 text-base gap-2 rounded-full",
+  icon: "h-10 w-10 rounded-full",
 } as const;
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -33,7 +35,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       ref={ref}
       disabled={disabled || loading}
       className={cn(
-        "inline-flex select-none items-center justify-center whitespace-nowrap font-medium transition-[background,color,box-shadow,transform] active:scale-[0.98] disabled:pointer-events-none disabled:opacity-55",
+        "inline-flex select-none items-center justify-center whitespace-nowrap font-normal transition-colors active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
         variants[variant], sizes[size], className,
       )}
       {...props}
@@ -50,7 +52,7 @@ export function ButtonLink({
   return (
     <Link
       href={href}
-      className={cn("inline-flex select-none items-center justify-center whitespace-nowrap font-medium transition-colors active:scale-[0.98]", variants[variant], sizes[size], className)}
+      className={cn("inline-flex select-none items-center justify-center whitespace-nowrap font-normal transition-colors active:scale-[0.98]", variants[variant], sizes[size], className)}
       {...rest}
     >
       {children}
