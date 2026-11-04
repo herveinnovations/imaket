@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { useId } from "react";
 import { cn } from "@/lib/utils";
+import { LOGO_WORD_PATH } from "./logo-path";
 
 const HEIGHT = { sm: 32, md: 44, lg: 60 } as const;
 
 /**
  * iMaket wordmark in the style of the Wix "TSHOP" badge: white oval with a thick
- * black ring, tall condensed heavy letters that run to the edge of the oval
- * (cropped by it), separated by thin white outlines.
+ * black ring and heavy letters bulged to the oval (big in the middle, smaller at
+ * the ends), separated by thin white outlines. Drawn as a path, so no font needed.
  */
 export function LogoMark({ className, size = "md" }: { className?: string; size?: keyof typeof HEIGHT }) {
   const clip = `logo-clip-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
@@ -19,14 +20,7 @@ export function LogoMark({ className, size = "md" }: { className?: string; size?
       </defs>
       <ellipse cx="100" cy="45" rx="94" ry="41" fill="#fff" />
       <g clipPath={`url(#${clip})`}>
-        <text
-          x="100" y="68" textAnchor="middle" fontSize="64" textLength="170" lengthAdjust="spacingAndGlyphs"
-          transform="translate(0 -11.25) scale(1 1.25)"
-          fill="#000" stroke="#fff" strokeWidth="3.5" strokeLinejoin="round" paintOrder="stroke"
-          style={{ fontFamily: "var(--font-archivo), 'Arial Black', Arial, sans-serif" }}
-        >
-          iMaket
-        </text>
+        <path d={LOGO_WORD_PATH} fill="#000" stroke="#fff" strokeWidth="2.6" strokeLinejoin="round" paintOrder="stroke" />
       </g>
       <ellipse cx="100" cy="45" rx="94" ry="41" fill="none" stroke="#000" strokeWidth="7" />
     </svg>
