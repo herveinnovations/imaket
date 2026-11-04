@@ -24,7 +24,8 @@ export function startNavigation() {
 }
 
 function isInternalNav(e: MouseEvent): boolean {
-  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
+  // runs in the capture phase, before Next's <Link> calls preventDefault() for client navigation
+  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
   const a = (e.target as Element | null)?.closest?.("a");
   if (!a || !a.href || a.target === "_blank" || a.hasAttribute("download") || a.dataset.noLoader !== undefined) return false;
   const url = new URL(a.href, location.href);
@@ -34,29 +35,33 @@ function isInternalNav(e: MouseEvent): boolean {
   return !same;                                                        // hash-only / same-page links don't navigate
 }
 
+const MIN_VISIBLE_MS = 550;   // always visible long enough to notice, even on instant pages
+
 function Overlay() {
   const pathname = usePathname();
   const search = useSearchParams();
-  const [active, setActive] = useState(false);
   const [visible, setVisible] = useState(false);
-  const delay = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const startedAt = useRef(0);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const failsafe = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const first = useRef(true);
 
-  // navigation finished → hide
+  // navigation finished → hide, but not before the minimum display time
   useEffect(() => {
-    setActive(false); setVisible(false);
-    if (delay.current) clearTimeout(delay.current);
-    if (failsafe.current) clearTimeout(failsafe.current);
+    if (first.current) { first.current = false; return; }
+    if (!startedAt.current) return;
+    const left = Math.max(0, MIN_VISIBLE_MS - (Date.now() - startedAt.current));
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(() => { setVisible(false); startedAt.current = 0; }, left);
   }, [pathname, search]);
 
   useEffect(() => {
     const start = () => {
-      setActive(true);
-      // short delay so instant (prefetched) pages don't flash
-      if (delay.current) clearTimeout(delay.current);
-      delay.current = setTimeout(() => setVisible(true), 120);
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+      startedAt.current = Date.now();
+      setVisible(true);                                  // show immediately on click
       if (failsafe.current) clearTimeout(failsafe.current);
-      failsafe.current = setTimeout(() => { setActive(false); setVisible(false); }, 15000);
+      failsafe.current = setTimeout(() => { setVisible(false); startedAt.current = 0; }, 15000);
     };
     const onClick = (e: MouseEvent) => { if (isInternalNav(e)) start(); };
     const onSubmit = (e: SubmitEvent) => {
@@ -65,21 +70,21 @@ function Overlay() {
       if (!e.defaultPrevented && (f.method || "get").toLowerCase() === "get" && !f.getAttribute("action")?.startsWith("javascript")) start();
     };
     const onPop = () => start();
-    document.addEventListener("click", onClick);
+    document.addEventListener("click", onClick, true);
     document.addEventListener("submit", onSubmit);
     window.addEventListener("popstate", onPop);
     window.addEventListener(START, start);
     return () => {
-      document.removeEventListener("click", onClick);
+      document.removeEventListener("click", onClick, true);
       document.removeEventListener("submit", onSubmit);
       window.removeEventListener("popstate", onPop);
       window.removeEventListener(START, start);
     };
   }, []);
 
-  if (!active || !visible) return null;
+  if (!visible) return null;
   return (
-    <div className="fixed inset-0 z-[100] grid place-items-center bg-white/70" aria-live="polite" aria-busy="true">
+    <div className="fixed inset-0 z-[100] grid place-items-center bg-white/75 backdrop-blur-[1px]" aria-live="polite" aria-busy="true">
       <Loader />
     </div>
   );
