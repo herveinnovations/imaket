@@ -31,8 +31,8 @@ export function StatusBadge({ status }: { status: string }) {
 // ─── Skeleton ────────────────────────────────────────────────────────
 export function Skeleton({ className }: { className?: string }) {
   return (
-    <div className={cn("relative overflow-hidden rounded-lg bg-surface-2", className)} aria-hidden>
-      <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent dark:via-white/5" />
+    <div className={cn("relative overflow-hidden bg-surface-2", className)} aria-hidden>
+      <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
     </div>
   );
 }
