@@ -15,7 +15,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center py-12">{children}</div>
         </div>
         <aside className="relative hidden flex-col items-center justify-center gap-8 bg-lime p-12 text-center text-black lg:flex" aria-hidden>
-          <LogoMark size="lg" className="scale-150" />
+          <LogoMark size="lg" className="h-28 w-auto" />
           <p className="mt-6 max-w-[14ch] font-display text-[2.6rem] leading-[1.05] tracking-[-0.05em]">Shop independent creators.</p>
           <p className="max-w-xs text-[17px]">New drops, one checkout, and a community of makers. Or open your own store in minutes.</p>
         </aside>
