@@ -34,7 +34,7 @@ function Group({ title, children, defaultOpen = true }: { title: string; childre
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="border-b border-black/30 py-4">
-      <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between text-[15px]" aria-expanded={open}>
+      <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between text-base" aria-expanded={open}>
         {title} {open ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
       </button>
       {open && <div className="mt-3">{children}</div>}
@@ -51,11 +51,11 @@ function SidebarBody({ categories }: { categories: Category[] }) {
   const [min, setMin] = useState(params.get("min") ?? "");
   const [max, setMax] = useState(params.get("max") ?? "");
   const [allCats, setAllCats] = useState(false);
-  const linkCls = (on: boolean) => cn("block py-1.5 text-[15px] hover:underline hover:underline-offset-4", on && "font-bold underline underline-offset-4");
+  const linkCls = (on: boolean) => cn("block py-1.5 text-base hover:underline hover:underline-offset-4", on && "font-bold underline underline-offset-4");
 
   return (
     <div>
-      <p className="border-b border-black/30 pb-3 text-[15px]">Browse by</p>
+      <p className="border-b border-black/30 pb-3 text-base">Browse by</p>
       <ul className="py-3">
         <li><Link href="/marketplace" className={linkCls(!cat && !audience && !isNew && !params.get("q"))}>All Products</Link></li>
         <li><Link href="/marketplace?audience=men" className={linkCls(audience === "men")}>Men</Link></li>
@@ -69,7 +69,7 @@ function SidebarBody({ categories }: { categories: Category[] }) {
         )}
       </ul>
 
-      <p className="mt-6 border-b border-black/30 pb-3 text-[15px]">Filter by</p>
+      <p className="mt-6 border-b border-black/30 pb-3 text-base">Filter by</p>
       <Group title="Price">
         <form className="flex items-center gap-2" onSubmit={(e) => { e.preventDefault(); set({ min: min || null, max: max || null }); }}>
           <input className="h-9 w-full border border-black/60 px-2 text-sm" inputMode="decimal" placeholder="Min" value={min} onChange={(e) => setMin(e.target.value.replace(/[^\d.]/g, ""))} aria-label="Minimum price" />
@@ -82,7 +82,7 @@ function SidebarBody({ categories }: { categories: Category[] }) {
         <ul className="space-y-1.5">
           {(Object.keys(PRODUCT_TYPE_LABEL) as ProductType[]).map((t) => (
             <li key={t}>
-              <label className="flex cursor-pointer items-center gap-2 text-[15px]">
+              <label className="flex cursor-pointer items-center gap-2 text-base">
                 <input type="checkbox" className="h-4 w-4 accent-black" checked={type === t} onChange={() => set({ type: type === t ? null : t })} />
                 {PRODUCT_TYPE_LABEL[t]}
               </label>

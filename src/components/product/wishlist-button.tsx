@@ -33,7 +33,7 @@ export function WishlistButton({ productId, className, withLabel }: { productId:
       aria-label={on ? "Remove from wishlist" : "Save to wishlist"}
       className={cn(
         withLabel
-          ? "inline-flex h-11 items-center gap-2 rounded-xl border bg-surface px-4 text-[15px] font-medium hover:bg-surface-2"
+          ? "inline-flex h-11 items-center gap-2 rounded-xl border bg-surface px-4 text-base font-medium hover:bg-surface-2"
           : "grid h-9 w-9 place-items-center rounded-full bg-surface/90 text-fg shadow-sm backdrop-blur hover:bg-surface",
         className,
       )}

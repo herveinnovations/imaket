@@ -23,7 +23,7 @@ export function AccountMenu({ user, compact }: { user: U; compact?: boolean }) {
 
   if (!user) {
     return (
-      <Link href="/login" className="flex h-10 items-center gap-2 px-1.5 text-[17px] hover:underline hover:underline-offset-4 xl:text-[19px]" aria-label="Log in">
+      <Link href="/login" className="flex h-10 items-center gap-2 px-1.5 text-base hover:underline hover:underline-offset-4 xl:text-lg" aria-label="Log in">
         <span className="grid h-[26px] w-[26px] place-items-center rounded-full bg-black text-lime"><UserRound className="h-4 w-4" aria-hidden /></span>
         {!compact && <span>Log In</span>}
       </Link>
@@ -48,7 +48,7 @@ export function AccountMenu({ user, compact }: { user: U; compact?: boolean }) {
         {!compact && <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} aria-hidden />}
       </button>
       {open && (
-        <div role="menu" className={cn("absolute top-full z-50 mt-1 w-56 border border-black bg-white py-2 text-[15px] text-black", compact ? "left-0" : "right-0")}>
+        <div role="menu" className={cn("absolute top-full z-50 mt-1 w-56 border border-black bg-white py-2 text-base text-black", compact ? "left-0" : "right-0")}>
           <p className="truncate px-4 pb-2 font-bold">{user.name}</p>
           {links.map(([href, label]) => (
             <Link key={href} role="menuitem" href={href} onClick={() => setOpen(false)} className="block px-4 py-1.5 hover:bg-lime">{label}</Link>

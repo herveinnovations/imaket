@@ -24,7 +24,7 @@ export default async function PolicyPage({ params }: { params: Params }) {
         {p.sections.map(([h, body]) => (
           <section key={h}>
             <h2 className="text-[1.5rem]">{h}</h2>
-            <p className="mt-2 text-[17px] leading-[1.55]">{body}</p>
+            <p className="mt-2 text-base leading-[1.55]">{body}</p>
           </section>
         ))}
       </div>

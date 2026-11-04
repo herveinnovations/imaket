@@ -10,7 +10,7 @@ import { addComment, createGroup, createPost, deletePost, joinGroup, leaveGroup,
 import { cn, timeAgo } from "@/lib/utils";
 import type { GroupPost } from "@/lib/data/community";
 
-const pill = "inline-flex h-9 items-center justify-center rounded-full px-5 text-[15px] transition-colors disabled:opacity-60";
+const pill = "inline-flex h-9 items-center justify-center rounded-full px-5 text-base transition-colors disabled:opacity-60";
 
 /** Join / Request To Join / Requested / Leave */
 export function JoinButton({ groupId, privacy, state, signedIn, className }: {
@@ -76,7 +76,7 @@ export function PostCard({ post, canComment, canDelete, showGroup = true }: { po
       <header className="flex items-start gap-3 p-4 pb-0">
         <Avatar name={post.author.full_name} src={post.author.avatar_url} size={40} />
         <div className="min-w-0 flex-1">
-          <p className="text-[15px]"><span className="font-bold">{post.author.full_name ?? "Member"}</span>
+          <p className="text-base"><span className="font-bold">{post.author.full_name ?? "Member"}</span>
             {showGroup && post.group && <> <span className="text-muted">in</span> <Link href={`/groups/${post.group.slug}`} className="underline underline-offset-2">{post.group.name}</Link></>}
           </p>
           <p className="text-sm text-muted" suppressHydrationWarning>{timeAgo(post.created_at)}</p>
@@ -136,8 +136,8 @@ export function CreateGroupButton({ signedIn }: { signedIn: boolean }) {
           </div>
           <fieldset>
             <legend className="label">Privacy</legend>
-            <label className="flex items-start gap-2 py-1 text-[15px]"><input type="radio" name="privacy" value="public" defaultChecked className="mt-1 accent-black" /> <span><b>Public</b> — anyone can see posts and join.</span></label>
-            <label className="flex items-start gap-2 py-1 text-[15px]"><input type="radio" name="privacy" value="private" className="mt-1 accent-black" /> <span><b>Private</b> — only members see posts; you approve requests.</span></label>
+            <label className="flex items-start gap-2 py-1 text-base"><input type="radio" name="privacy" value="public" defaultChecked className="mt-1 accent-black" /> <span><b>Public</b> — anyone can see posts and join.</span></label>
+            <label className="flex items-start gap-2 py-1 text-base"><input type="radio" name="privacy" value="private" className="mt-1 accent-black" /> <span><b>Private</b> — only members see posts; you approve requests.</span></label>
           </fieldset>
           <button disabled={pending} className={cn(pill, "w-full bg-brand text-white hover:bg-[#006b20]")}>{pending ? "Creating…" : "Create Group"}</button>
         </form>
@@ -152,7 +152,7 @@ export function RequestRow({ groupId, userId, name, avatar }: { groupId: string;
   return (
     <li className="flex items-center gap-3 py-2">
       <Avatar name={name} src={avatar} size={32} />
-      <span className="flex-1 truncate text-[15px]">{name ?? "Member"}</span>
+      <span className="flex-1 truncate text-base">{name ?? "Member"}</span>
       <button disabled={pending} onClick={() => run(true)} className="h-8 rounded-full bg-brand px-3 text-sm text-white">Approve</button>
       <button disabled={pending} onClick={() => run(false)} className="h-8 rounded-full border border-black px-3 text-sm">Decline</button>
     </li>

@@ -92,7 +92,7 @@ export default async function ProductPage({ params }: { params: Params }) {
           </nav>
           <h1 className="text-[2.05rem] leading-[1.15]">{p.title}</h1>
           {p.creator && (
-            <Link href={`/${p.creator.handle}`} className="mt-2 inline-flex items-center gap-2 text-[15px] hover:underline">
+            <Link href={`/${p.creator.handle}`} className="mt-2 inline-flex items-center gap-2 text-base hover:underline">
               <Avatar name={p.creator.store_name} src={p.creator.avatar_url} size={24} />
               {p.creator.store_name}
               {p.creator.verified && <BadgeCheck className="h-4 w-4" aria-label="Verified" />}
@@ -203,7 +203,7 @@ export default async function ProductPage({ params }: { params: Params }) {
                     </div>
                   </div>
                   {r.title && <p className="mt-3 font-medium">{r.title}</p>}
-                  {r.body && <p className="mt-1 text-[15px] leading-7 text-fg/85">{r.body}</p>}
+                  {r.body && <p className="mt-1 text-base leading-7 text-fg/85">{r.body}</p>}
                   {r.creator_reply && (
                     <div className="mt-3 bg-stone p-3 text-sm">
                       <span className="font-medium">{p.creator?.store_name} replied:</span> {r.creator_reply}

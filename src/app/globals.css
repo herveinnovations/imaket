@@ -27,13 +27,14 @@
   html { -webkit-tap-highlight-color: transparent; }
   body {
     @apply bg-bg text-fg font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.6;
     text-rendering: optimizeLegibility;
   }
-  /* Arial Black headlines with the template's tight tracking (-0.05em) */
-  h1, h2, h3 { @apply font-display font-normal; }
-  h1, h2, h3, .font-display { letter-spacing: -0.05em; line-height: 1.1; }
-  /* Arial Black has a single weight: never let utilities fake a heavier bold */
-  .font-display, h1:not(.font-sans), h2:not(.font-sans), h3:not(.font-sans) { font-weight: 400 !important; }
+  /* Outfit headings, EO Robotics Lab style: semibold, tight tracking */
+  h1, h2, h3, h4, h5, h6 { @apply font-display; font-weight: 600; line-height: 1.25; letter-spacing: -0.02em; }
+  h1, h2, .font-display { letter-spacing: -0.03em; line-height: 1.1; }
+  .font-display { font-weight: 600; }
   :focus-visible { @apply outline-none ring-2 ring-fg ring-offset-2 ring-offset-bg; }
   ::selection { background: rgb(var(--lime)); color: #000; }
 
@@ -45,14 +46,14 @@
 @layer components {
   .card { @apply border border-fg/15 bg-surface; }
   .input {
-    @apply h-11 w-full border border-fg/60 bg-surface px-3.5 text-[15px] text-fg placeholder:text-muted/80
+    @apply h-11 w-full border border-fg/60 bg-surface px-3.5 text-base text-fg placeholder:text-muted/80
            transition-colors focus:border-fg focus:outline-none focus:ring-1 focus:ring-fg
            disabled:cursor-not-allowed disabled:opacity-60;
   }
-  .wix-h { @apply font-display text-[1.85rem] leading-[1.1] tracking-[-0.05em] sm:text-[2.05rem]; }
+  .wix-h { @apply font-display text-[1.85rem] leading-[1.1] tracking-[-0.03em] sm:text-[2.05rem]; }
   .wix-link { @apply underline-offset-4 hover:underline; }
   .label { @apply mb-1.5 block text-sm font-medium text-fg; }
-  .prose-sk { @apply max-w-[68ch] text-[15.5px] leading-7 text-fg/90; }
+  .prose-sk { @apply max-w-[68ch] text-base leading-[1.6] text-fg/90; }
   .prose-sk p { @apply mb-4; }
   .prose-sk ul { @apply mb-4 list-disc space-y-1 pl-5; }
   .prose-sk strong { @apply font-semibold text-fg; }

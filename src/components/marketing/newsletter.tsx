@@ -20,7 +20,7 @@ export function NewsletterLink({ className, children }: { className?: string; ch
 export function NewsletterStrip({ text }: { text: string }) {
   return (
     <div className="bg-white">
-      <NewsletterLink className="flex h-12 w-full items-center px-3 text-left text-[17px] hover:underline hover:underline-offset-4 xl:text-[19px]">
+      <NewsletterLink className="flex h-12 w-full items-center px-3 text-left text-base hover:underline hover:underline-offset-4 xl:text-lg">
         {text}
       </NewsletterLink>
     </div>
@@ -78,15 +78,15 @@ export function NewsletterPopup({ title, text, autoOpen = true }: { title: strin
             <button onClick={close} className="absolute right-3 top-3 grid h-10 w-10 place-items-center" aria-label="Close"><X className="h-6 w-6" /></button>
             <div className="grid gap-8 px-4 pb-10 pt-6 md:grid-cols-2 md:px-6 md:pb-14">
               <div>
-                <h2 id="nl-title" className="max-w-[16ch] font-display text-[2.1rem] leading-[1.05] tracking-[-0.05em] md:text-[2.6rem]">{title}</h2>
-                <p className="mt-3 text-[15px]">{text}</p>
+                <h2 id="nl-title" className="max-w-[16ch] font-display text-[2.1rem] leading-[1.05] tracking-[-0.03em] md:text-[2.6rem]">{title}</h2>
+                <p className="mt-3 text-base">{text}</p>
               </div>
               {state === "done" ? (
                 <div className="self-center md:pr-10" aria-live="polite">
-                  <p className="font-display text-2xl tracking-[-0.04em]">Thanks for subscribing!</p>
+                  <p className="font-display text-2xl tracking-[-0.03em]">Thanks for subscribing!</p>
                   {code && (
                     <div className="mt-4">
-                      <p className="text-[15px]">Use this code at checkout on your first order:</p>
+                      <p className="text-base">Use this code at checkout on your first order:</p>
                       <button onClick={() => { navigator.clipboard.writeText(code).catch(() => {}); setCopied(true); }}
                         className="mt-2 inline-flex items-center gap-3 border-2 border-black bg-white px-4 py-2 font-display text-xl tracking-[-0.03em]">
                         {code} {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
@@ -97,16 +97,16 @@ export function NewsletterPopup({ title, text, autoOpen = true }: { title: strin
               ) : (
                 <form onSubmit={submit} className="space-y-4 md:pr-10" noValidate>
                   <div>
-                    <label htmlFor="nl-email" className="mb-1 block text-[15px]">Email *</label>
+                    <label htmlFor="nl-email" className="mb-1 block text-base">Email *</label>
                     <input id="nl-email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)}
                       className="h-10 w-full border-b-2 border-black bg-transparent px-0 text-base focus:outline-none" required />
                   </div>
-                  <label className="flex items-center gap-2.5 text-[15px]">
+                  <label className="flex items-center gap-2.5 text-base">
                     <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="h-4 w-4 accent-black" />
                     Yes, subscribe me to your newsletter. *
                   </label>
                   {error && <p className="text-sm font-bold text-[#b00020]" role="alert">{error}</p>}
-                  <button disabled={state === "busy"} className="h-11 w-full rounded-full bg-black text-[15px] text-white hover:bg-black/85 disabled:opacity-60">
+                  <button disabled={state === "busy"} className="h-11 w-full rounded-full bg-black text-base text-white hover:bg-black/85 disabled:opacity-60">
                     {state === "busy" ? "Submitting…" : "Submit"}
                   </button>
                 </form>

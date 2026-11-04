@@ -35,7 +35,7 @@ export async function SiteHeader() {
 
           <nav className="hidden min-w-0 max-w-[calc(50%-90px)] items-center gap-0.5 overflow-x-auto scrollbar-none lg:flex" aria-label="Main">
             {NAV.map(([href, label]) => (
-              <Link key={href} href={href} className="shrink-0 whitespace-nowrap px-2 py-1.5 text-[16px] hover:underline hover:underline-offset-4 xl:text-[19px]">
+              <Link key={href} href={href} className="shrink-0 whitespace-nowrap px-2.5 py-1.5 text-sm font-semibold hover:underline hover:underline-offset-4 xl:text-base">
                 {label}
               </Link>
             ))}

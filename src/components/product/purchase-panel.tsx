@@ -39,7 +39,7 @@ export function PurchasePanel({ product: p }: { product: Product }) {
     <div>
       {p.pay_what_you_want ? (
         <div className="mt-2">
-          <label htmlFor="pwyw" className="mb-1.5 block text-[15px]">Name your price</label>
+          <label htmlFor="pwyw" className="mb-1.5 block text-base">Name your price</label>
           <div className="relative">
             <input id="pwyw" inputMode="decimal" className="h-11 w-full border border-black/60 pl-14 pr-3 text-lg" value={custom}
               onChange={(e) => setCustom(e.target.value.replace(/[^\d.]/g, ""))} aria-invalid={!!pwywError} aria-describedby="pwyw-hint" />
@@ -50,7 +50,7 @@ export function PurchasePanel({ product: p }: { product: Product }) {
           </p>
         </div>
       ) : (
-        <p className="text-[15px]">
+        <p className="text-base">
           <span className="sr-only">Price</span>
           {p.compare_at_price && p.compare_at_price > p.price && <s className="mr-2 text-muted">{formatMoney(p.compare_at_price, p.currency)}</s>}
           {formatMoney(p.price, p.currency)}
@@ -59,7 +59,7 @@ export function PurchasePanel({ product: p }: { product: Product }) {
 
       {multi && !soldOut && (
         <fieldset className="mt-6">
-          <legend className="mb-1.5 text-[15px]">{p.type === "ticket" ? "Tickets" : "Quantity"}</legend>
+          <legend className="mb-1.5 text-base">{p.type === "ticket" ? "Tickets" : "Quantity"}</legend>
           <QtyStepper qty={qty} setQty={setQty} max={maxQty} />
         </fieldset>
       )}

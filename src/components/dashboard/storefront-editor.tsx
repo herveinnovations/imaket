@@ -50,7 +50,7 @@ export function StorefrontEditor({ creator, products }: { creator: Creator; prod
             <div>
               <label htmlFor="handle" className="label">Store link</label>
               <div className="flex items-center rounded-xl border bg-surface focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/15">
-                <span className="pl-3.5 text-[15px] text-muted">{siteHost()}/</span>
+                <span className="pl-3.5 text-base text-muted">{siteHost()}/</span>
                 <input id="handle" value={s.handle} onChange={(e) => up({ handle: e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, "") })} className="h-11 min-w-0 flex-1 bg-transparent pr-3 outline-none" />
               </div>
               {s.handle !== creator.handle && <p className="mt-1.5 text-sm text-warning">Your old link stops working when you save.</p>}

@@ -73,7 +73,7 @@ export default async function StorefrontPage({ params }: { params: Params }) {
                 {creator.store_name}
                 {creator.verified && <BadgeCheck className="h-7 w-7" aria-label="Verified creator" />}
               </h1>
-              {creator.tagline && <p className="mt-1 text-[17px]">{creator.tagline}</p>}
+              {creator.tagline && <p className="mt-1 text-base">{creator.tagline}</p>}
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2 pb-1">
@@ -102,8 +102,8 @@ export default async function StorefrontPage({ params }: { params: Params }) {
                       <ProductCover id={p.id} title={p.title} type={p.type} coverUrl={p.cover_url} size="sm" className="aspect-square sm:aspect-auto sm:h-full" />
                       <div className="flex flex-col p-5">
                         <span className="w-fit bg-black px-2 py-0.5 text-xs text-lime">Featured · {PRODUCT_TYPE_LABEL[p.type]}</span>
-                        <span className="mt-2 font-display text-2xl leading-tight tracking-[-0.05em] group-hover:underline">{p.title}</span>
-                        <span className="mt-2 line-clamp-2 text-[15px]">{p.summary}</span>
+                        <span className="mt-2 font-display text-2xl leading-tight tracking-[-0.03em] group-hover:underline">{p.title}</span>
+                        <span className="mt-2 line-clamp-2 text-base">{p.summary}</span>
                         <span className="mt-auto pt-3 text-base">{formatMoney(p.price, p.currency)}</span>
                       </div>
                     </Link>
@@ -127,7 +127,7 @@ export default async function StorefrontPage({ params }: { params: Params }) {
             {creator.bio && (
               <div>
                 <h2 className="mb-2 text-2xl">About</h2>
-                <p className="text-[15px] leading-7">{creator.bio}</p>
+                <p className="text-base leading-7">{creator.bio}</p>
               </div>
             )}
             <dl className="grid grid-cols-2 gap-3">

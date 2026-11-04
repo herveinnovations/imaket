@@ -17,8 +17,8 @@ export default async function MembersPage({ searchParams }: { searchParams: SP }
     return (
       <section className="flex min-h-[340px] flex-col items-center justify-center bg-white px-6 py-20 text-center">
         <h1 className="font-sans text-[1.65rem] font-normal tracking-normal">Log In to Connect With Members</h1>
-        <p className="mt-4 max-w-[22rem] text-[15px]">View and follow other members, leave comments &amp; more.</p>
-        <Link href="/login?next=/members" className="mt-8 inline-flex h-10 items-center bg-brand px-14 text-[15px] text-white hover:bg-[#006b20]">Log In</Link>
+        <p className="mt-4 max-w-[22rem] text-base">View and follow other members, leave comments &amp; more.</p>
+        <Link href="/login?next=/members" className="mt-8 inline-flex h-10 items-center bg-brand px-14 text-base text-white hover:bg-[#006b20]">Log In</Link>
       </section>
     );
   }
@@ -34,23 +34,23 @@ export default async function MembersPage({ searchParams }: { searchParams: SP }
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-[2.05rem]">Members</h1>
-          <p className="mt-1 text-[15px]">{total} {total === 1 ? "member" : "members"} · creators and shoppers on iMaket</p>
+          <p className="mt-1 text-base">{total} {total === 1 ? "member" : "members"} · creators and shoppers on iMaket</p>
         </div>
         <form className="relative w-full sm:w-72" role="search">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
           <input name="q" defaultValue={q} type="search" placeholder="Search members" aria-label="Search members"
-            className="h-10 w-full border border-black/60 pl-9 pr-3 text-[15px] focus:border-black focus:outline-none" />
+            className="h-10 w-full border border-black/60 pl-9 pr-3 text-base focus:border-black focus:outline-none" />
         </form>
       </div>
 
       {members.length === 0 ? (
-        <p className="py-20 text-center text-[17px]">{q ? `No members match “${q}”.` : "No members to show yet."}</p>
+        <p className="py-20 text-center text-base">{q ? `No members match “${q}”.` : "No members to show yet."}</p>
       ) : (
         <ul className="mt-10 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
           {members.map((m) => (
             <li key={m.id} className="flex flex-col items-center bg-stone px-5 py-8 text-center">
               <Avatar name={m.full_name} src={m.avatar_url} size={88} />
-              <p className="mt-4 text-[17px]">{m.full_name ?? "Member"}</p>
+              <p className="mt-4 text-base">{m.full_name ?? "Member"}</p>
               {m.handle ? (
                 <Link href={`/${m.handle}`} className="mt-0.5 text-sm underline underline-offset-4">{m.store_name}</Link>
               ) : <p className="mt-0.5 text-sm text-muted">Shopper</p>}

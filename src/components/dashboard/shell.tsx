@@ -102,7 +102,7 @@ export function DashboardShell({
               {g.items.map((i) => (
                 <li key={i.href}>
                   <Link href={i.href} onClick={() => setOpen(false)} aria-current={active(i) ? "page" : undefined}
-                    className={cn("relative flex items-center gap-3 px-3 py-2 text-[15px] transition-colors",
+                    className={cn("relative flex items-center gap-3 px-3 py-2 text-base transition-colors",
                       active(i) ? "bg-black text-lime" : "text-black hover:underline hover:underline-offset-4")}>
                     <i.icon className="h-[18px] w-[18px]" aria-hidden /> {i.label}
                   </Link>
@@ -150,7 +150,7 @@ export function DashboardShell({
       <div className="min-w-0">
         <header className="sticky top-0 z-30 flex h-[62px] items-center gap-2 border-b border-black/15 bg-white px-4 sm:px-6">
           <button className="-ml-2 rounded-xl p-2 lg:hidden" onClick={() => setOpen(true)} aria-label="Open menu"><Menu className="h-5 w-5" /></button>
-          <Link href="/marketplace" className="hidden text-[15px] hover:underline sm:block">‹ Back to shop</Link>
+          <Link href="/marketplace" className="hidden text-base hover:underline sm:block">‹ Back to shop</Link>
           <div className="ml-auto flex items-center gap-1">
             <NotificationDropdown userId={user.id} initial={notifications} />
           </div>

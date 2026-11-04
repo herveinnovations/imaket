@@ -28,7 +28,7 @@ export function ProductCard({ product: p, className, showCreator = true, align =
         <QuickViewButton product={p} />
       </div>
       <Link href={`/p/${p.slug}`} className={cn("mt-4 block", align === "center" && "text-center")}>
-        <p className="text-[15px] leading-[1.3] group-hover:underline group-hover:underline-offset-4">{p.title}</p>
+        <p className="text-base leading-[1.3] group-hover:underline group-hover:underline-offset-4">{p.title}</p>
         <p className="mt-1 text-base">
           <span className="sr-only">Price</span>
           {onSale && <s className="mr-2 text-muted">{formatMoney(p.compare_at_price!, p.currency)}</s>}

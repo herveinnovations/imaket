@@ -49,13 +49,13 @@ function QuickViewModal({ product: p, open, onClose }: { product: Product; open:
             <div className="flex flex-col p-6 md:p-8">
               <p className="text-sm text-muted">{PRODUCT_TYPE_LABEL[p.type]}{p.creator && <> · {p.creator.store_name}</>}</p>
               <h2 className="mt-1 text-[1.9rem]">{p.title}</h2>
-              <p className="mt-2 text-[15px]">
+              <p className="mt-2 text-base">
                 {p.compare_at_price && p.compare_at_price > p.price && <s className="mr-2 text-muted">{formatMoney(p.compare_at_price, p.currency)}</s>}
                 {p.pay_what_you_want ? `From ${formatMoney(p.min_price ?? 0, p.currency)}` : formatMoney(p.price, p.currency)}
               </p>
               {multi && !soldOut && (
                 <fieldset className="mt-6">
-                  <legend className="mb-1.5 text-[15px]">Quantity</legend>
+                  <legend className="mb-1.5 text-base">Quantity</legend>
                   <QtyStepper qty={qty} setQty={setQty} max={maxQty} />
                 </fieldset>
               )}
@@ -63,7 +63,7 @@ function QuickViewModal({ product: p, open, onClose }: { product: Product; open:
                 className="mt-6 h-10 w-full rounded-full bg-brand text-base text-white hover:bg-[#006b20] disabled:opacity-50">
                 {soldOut ? "Out of Stock" : "Add to Cart"}
               </button>
-              <Link href={`/p/${p.slug}`} onClick={onClose} className="mt-4 text-[15px] underline underline-offset-4">View More Details</Link>
+              <Link href={`/p/${p.slug}`} onClick={onClose} className="mt-4 text-base underline underline-offset-4">View More Details</Link>
             </div>
           </motion.div>
         </div>

@@ -41,9 +41,9 @@ export function MobileNav({ signedIn }: { signedIn: boolean }) {
             <nav className="flex-1 overflow-y-auto px-6 pb-10 pt-6">
               <ul className="space-y-1">
                 {ITEMS.map(([href, label]) => (
-                  <li key={href}><Link href={href} onClick={close} className="block py-2 font-display text-[2rem] leading-tight tracking-[-0.05em]">{label}</Link></li>
+                  <li key={href}><Link href={href} onClick={close} className="block py-2 font-display text-[2rem] leading-tight tracking-[-0.03em]">{label}</Link></li>
                 ))}
-                <li><Link href={signedIn ? "/dashboard" : "/login"} onClick={close} className="block py-2 font-display text-[2rem] leading-tight tracking-[-0.05em]">{signedIn ? "My Account" : "Log In"}</Link></li>
+                <li><Link href={signedIn ? "/dashboard" : "/login"} onClick={close} className="block py-2 font-display text-[2rem] leading-tight tracking-[-0.03em]">{signedIn ? "My Account" : "Log In"}</Link></li>
               </ul>
               <form action="/marketplace" className="relative mt-8" role="search" onSubmit={close}>
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2" />

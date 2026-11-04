@@ -123,13 +123,13 @@ export function SitewideCodes({ codes }: { codes: SitewideCode[] }) {
 
   return (
     <div className="space-y-4">
-      <p className="text-[15px]">Sitewide codes work in every store that takes part in sitewide sales (stores can opt out in their storefront settings). The discount comes off the sale price before iMaket&apos;s fee.</p>
+      <p className="text-base">Sitewide codes work in every store that takes part in sitewide sales (stores can opt out in their storefront settings). The discount comes off the sale price before iMaket&apos;s fee.</p>
       {codes.length > 0 && (
         <ul className="divide-y divide-black/15 border border-black/20">
           {codes.map((c) => (
             <li key={c.id} className="flex flex-wrap items-center gap-x-4 gap-y-2 p-4">
               <span className="font-display text-xl tracking-[-0.03em]">{c.code}</span>
-              <span className="text-[15px]">{c.type === "percent" ? `${c.value}% off` : `${c.value} off`}{c.first_order_only ? " · first order only" : ""}</span>
+              <span className="text-base">{c.type === "percent" ? `${c.value}% off` : `${c.value} off`}{c.first_order_only ? " · first order only" : ""}</span>
               <span className="text-sm text-muted">Used {c.used_count}{c.max_uses ? ` / ${c.max_uses}` : ""} times{c.ends_at ? ` · ends ${new Date(c.ends_at).toLocaleDateString()}` : ""}</span>
               <div className="ml-auto flex items-center gap-3">
                 <Switch label={c.active ? "Active" : "Paused"} checked={c.active} onChange={() => toggle(c)} />
@@ -163,7 +163,7 @@ export function SitewideCodes({ codes }: { codes: SitewideCode[] }) {
 export function NewsletterExport({ count }: { count: number }) {
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <p className="text-[15px]"><span className="font-display text-3xl">{count}</span> newsletter {count === 1 ? "subscriber" : "subscribers"}</p>
+      <p className="text-base"><span className="font-display text-3xl">{count}</span> newsletter {count === 1 ? "subscriber" : "subscribers"}</p>
       <a href="/api/admin/newsletter" className="inline-flex h-10 items-center gap-2 rounded-full border border-black px-5 hover:bg-black hover:text-white">
         <Download className="h-4 w-4" /> Download CSV
       </a>

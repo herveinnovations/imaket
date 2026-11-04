@@ -16,8 +16,8 @@ const variants = {
 
 const sizes = {
   sm: "h-9 px-4 text-sm gap-1.5 rounded-full",
-  md: "h-10 px-5 text-base gap-2 rounded-full",
-  lg: "h-12 px-7 text-base gap-2 rounded-full",
+  md: "h-10 px-5 text-sm gap-2 rounded-full",
+  lg: "h-12 px-7 text-[15px] gap-2 rounded-full",
   icon: "h-10 w-10 rounded-full",
 } as const;
 
@@ -35,7 +35,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       ref={ref}
       disabled={disabled || loading}
       className={cn(
-        "inline-flex select-none items-center justify-center whitespace-nowrap font-normal transition-colors active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex select-none items-center justify-center whitespace-nowrap font-semibold transition-colors active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
         variants[variant], sizes[size], className,
       )}
       {...props}
@@ -52,7 +52,7 @@ export function ButtonLink({
   return (
     <Link
       href={href}
-      className={cn("inline-flex select-none items-center justify-center whitespace-nowrap font-normal transition-colors active:scale-[0.98]", variants[variant], sizes[size], className)}
+      className={cn("inline-flex select-none items-center justify-center whitespace-nowrap font-semibold transition-colors active:scale-[0.98]", variants[variant], sizes[size], className)}
       {...rest}
     >
       {children}

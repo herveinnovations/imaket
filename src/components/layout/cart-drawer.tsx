@@ -20,7 +20,7 @@ export function CartButton() {
       aria-label={`Cart, ${count} item${count === 1 ? "" : "s"}`}>
       {/* Wix cart icon: count inside a black circle */}
       <motion.span key={count} initial={{ scale: 0.7 }} animate={{ scale: 1 }}
-        className="grid h-[30px] min-w-[30px] place-items-center rounded-full bg-black px-1.5 text-[15px] font-bold text-lime tabular-nums">
+        className="grid h-[30px] min-w-[30px] place-items-center rounded-full bg-black px-1.5 text-base font-bold text-lime tabular-nums">
         {count}
       </motion.span>
     </button>
@@ -66,7 +66,7 @@ export function CartDrawer() {
                     <li key={i.productId} className="flex gap-3 py-4">
                       <ProductCover id={i.productId} title={i.title} type={i.type} coverUrl={i.coverUrl} size="sm" className="h-24 w-24 shrink-0" />
                       <div className="min-w-0 flex-1">
-                        <Link href={`/p/${i.slug}`} onClick={() => setOpen(false)} className="line-clamp-2 text-[15px] hover:underline">{i.title}</Link>
+                        <Link href={`/p/${i.slug}`} onClick={() => setOpen(false)} className="line-clamp-2 text-base hover:underline">{i.title}</Link>
                         <p className="text-sm">{formatMoney(lineUnit(i), i.currency)}</p>
                         <p className="text-xs text-muted">{i.creatorName}</p>
                         <div className="mt-2 flex items-center justify-between">

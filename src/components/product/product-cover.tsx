@@ -70,7 +70,7 @@ export function ProductCover({
     <div className={cn("relative overflow-hidden", className)} style={{ background: bg, color: ink }} aria-hidden>
       <Motif type={type} ink={ink} />
       <div className={cn("absolute inset-x-0 bottom-0 flex flex-col", size === "sm" ? "p-3" : size === "lg" ? "p-8" : "p-5")}>
-        <span className={cn("font-display leading-[1] tracking-[-0.05em] [text-wrap:balance]",
+        <span className={cn("font-display leading-[1] tracking-[-0.03em] [text-wrap:balance]",
           size === "sm" ? "text-base" : size === "lg" ? "text-4xl sm:text-5xl" : "text-[1.6rem]")}>
           {title}
         </span>

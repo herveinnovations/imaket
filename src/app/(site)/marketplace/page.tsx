@@ -64,8 +64,8 @@ export default async function MarketplacePage({ searchParams }: { searchParams: 
           <Suspense><MarketplaceToolbar categories={categories} total={total} /></Suspense>
           {items.length === 0 ? (
             <div className="py-20 text-center">
-              <p className="font-display text-2xl tracking-[-0.04em]">We couldn&apos;t find any matches</p>
-              <p className="mt-2 text-[15px]">Try a different collection or clear your filters.</p>
+              <p className="font-display text-2xl tracking-[-0.03em]">We couldn&apos;t find any matches</p>
+              <p className="mt-2 text-base">Try a different collection or clear your filters.</p>
               <ButtonLink href="/marketplace" className="mt-6">Shop All</ButtonLink>
             </div>
           ) : (
@@ -77,7 +77,7 @@ export default async function MarketplacePage({ searchParams }: { searchParams: 
             <nav className="mt-14 flex justify-center gap-1" aria-label="Pagination">
               {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
                 <Link key={p} href={pageHref(p)} aria-current={p === current ? "page" : undefined}
-                  className={`grid h-9 min-w-9 place-items-center px-2 text-[15px] ${p === current ? "bg-black text-white" : "hover:underline"}`}>{p}</Link>
+                  className={`grid h-9 min-w-9 place-items-center px-2 text-base ${p === current ? "bg-black text-white" : "hover:underline"}`}>{p}</Link>
               ))}
             </nav>
           )}

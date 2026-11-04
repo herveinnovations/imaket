@@ -26,8 +26,24 @@ const config: Config = {
         danger: "rgb(var(--danger) / <alpha-value>)",
       },
       fontFamily: {
-        sans: ["Arial", "var(--font-arimo)", "Helvetica", "sans-serif"],
-        display: ['"Arial Black"', "var(--font-archivo)", '"Arial Bold"', "Arial", "sans-serif"],
+        sans: ["var(--font-outfit)", "Outfit", "-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Roboto", "sans-serif"],
+        display: ["var(--font-outfit)", "Outfit", "-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Roboto", "sans-serif"],
+      },
+      // Type scale from eoroboticslab.com (tokens.css): 17px body, 14px UI, 13px captions.
+      fontSize: {
+        "2xs": ["12px", { lineHeight: "1.5" }],
+        xs: ["13px", { lineHeight: "1.5" }],
+        sm: ["14px", { lineHeight: "1.5" }],
+        base: ["17px", { lineHeight: "1.6" }],
+        lg: ["19px", { lineHeight: "1.6" }],
+        xl: ["21px", { lineHeight: "1.25" }],
+        "2xl": ["24px", { lineHeight: "1.25" }],
+        "3xl": ["28px", { lineHeight: "1.25" }],
+        "4xl": ["32px", { lineHeight: "1.1" }],
+        "5xl": ["36px", { lineHeight: "1.1" }],
+        "6xl": ["44px", { lineHeight: "1.1" }],
+        "7xl": ["56px", { lineHeight: "1.1" }],
+        "8xl": ["64px", { lineHeight: "1.1" }],
       },
       // Square corners everywhere (Wix Harmony streetwear template); pills stay rounded-full.
       borderRadius: { none: "0", sm: "0", DEFAULT: "0", md: "0", lg: "0", xl: "0", "2xl": "0", "3xl": "0", full: "9999px" },

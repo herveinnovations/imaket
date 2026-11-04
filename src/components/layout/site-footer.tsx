@@ -27,7 +27,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="bg-lime text-black">
-      <div className="grid gap-x-6 gap-y-10 px-3 py-6 text-[17px] leading-[1.3] sm:grid-cols-3 sm:py-3 xl:text-[19px]">
+      <div className="grid gap-x-6 gap-y-10 px-3 py-6 text-base leading-[1.3] sm:grid-cols-3 sm:py-3 xl:text-lg">
         {/* column 1 */}
         <div className="flex min-h-full flex-col justify-between gap-10 sm:min-h-[520px]">
           <div className="space-y-0">
@@ -67,7 +67,7 @@ export async function SiteFooter() {
         <div className="flex flex-col justify-between gap-10 sm:min-h-[520px]">
           <div>
             <p className="mb-2">Shop</p>
-            <ul className="space-y-0.5 text-[16px] xl:text-[17px]">
+            <ul className="space-y-0.5 text-[16px] xl:text-base">
               {SHOP.map(([href, label]) => <li key={href}><Link href={href} className={link}>{label}</Link></li>)}
             </ul>
           </div>

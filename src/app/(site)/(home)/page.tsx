@@ -46,8 +46,8 @@ export default async function HomePage() {
             <h1 className="mx-auto max-w-[11ch] text-[2rem] md:text-[clamp(1.5rem,2.05vw,2.3rem)]">{c.hero_title}</h1>
           </div>
           <div className="flex flex-1 flex-col items-center justify-end gap-2 px-4 pb-4 text-center md:px-3">
-            <p className="max-w-[17em] text-[17px] leading-[1.3] lg:text-[19px]">{c.hero_text}</p>
-            <ButtonLink href="/marketplace" size="sm" className="mt-1 h-[30px] px-3 text-[17px] lg:text-[19px]">{c.hero_cta}</ButtonLink>
+            <p className="max-w-[17em] text-base leading-[1.3] lg:text-lg">{c.hero_text}</p>
+            <ButtonLink href="/marketplace" size="sm" className="mt-1 h-[30px] px-3 text-base lg:text-lg">{c.hero_cta}</ButtonLink>
             <Link href="/register?role=creator" className="mt-1 text-sm underline underline-offset-4">or open your own store</Link>
           </div>
           <Panel src={heroSrc(1)} product={heroSrc(1) ? undefined : pick(1)} className="aspect-[4/5] md:aspect-auto md:h-[47%]" />
@@ -55,7 +55,7 @@ export default async function HomePage() {
 
         <Panel src={heroSrc(2)} product={heroSrc(2) ? undefined : pick(2)} className="aspect-[4/5] md:aspect-auto md:h-full">
           {c.sale_text && (
-            <p className="absolute bottom-3 left-3 max-w-[9.5em] bg-white/0 text-[17px] leading-[1.3] text-black lg:text-[19px]"
+            <p className="absolute bottom-3 left-3 max-w-[9.5em] bg-white/0 text-base leading-[1.3] text-black lg:text-lg"
               style={{ textShadow: "0 0 12px rgba(255,255,255,.9)" }}>
               {c.sale_text}
             </p>
@@ -68,7 +68,7 @@ export default async function HomePage() {
         <h2 className="text-center text-[2rem] md:text-[clamp(1.6rem,2.05vw,2.3rem)]">New Drops</h2>
         {drops.length === 0 ? (
           <div className="mx-auto mt-10 max-w-md px-4 text-center">
-            <p className="text-[17px]">New products from iMaket creators will appear here.</p>
+            <p className="text-base">New products from iMaket creators will appear here.</p>
             <ButtonLink href="/register?role=creator" className="mt-5">Open a store</ButtonLink>
           </div>
         ) : (
@@ -77,7 +77,7 @@ export default async function HomePage() {
           </div>
         )}
         <div className="mt-14 flex justify-center">
-          <ButtonLink href="/marketplace" size="sm" className="h-[30px] px-4 text-[17px] lg:text-[19px]">Shop All</ButtonLink>
+          <ButtonLink href="/marketplace" size="sm" className="h-[30px] px-4 text-base lg:text-lg">Shop All</ButtonLink>
         </div>
       </section>
 
@@ -86,8 +86,8 @@ export default async function HomePage() {
         <Panel src={promoSrc(0)} product={promoSrc(0) ? undefined : pick(3)} className="aspect-[4/5] md:aspect-auto md:h-full" />
         <div className="flex flex-col items-center justify-center gap-3 bg-surface-2 px-6 py-16 text-center md:py-0">
           <h2 className="text-[2rem] md:text-[clamp(1.6rem,2.05vw,2.3rem)]">{c.promo_title}</h2>
-          <p className="max-w-[15em] text-[17px] leading-[1.3] lg:text-[19px]">{c.promo_text}</p>
-          <ButtonLink href="/marketplace" size="sm" className="mt-1 h-[30px] px-4 text-[17px] lg:text-[19px]">Shop Now</ButtonLink>
+          <p className="max-w-[15em] text-base leading-[1.3] lg:text-lg">{c.promo_text}</p>
+          <ButtonLink href="/marketplace" size="sm" className="mt-1 h-[30px] px-4 text-base lg:text-lg">Shop Now</ButtonLink>
         </div>
         <Panel src={promoSrc(1)} product={promoSrc(1) ? undefined : pick(4)} className="aspect-[4/5] md:aspect-auto md:h-full" />
       </section>
@@ -100,13 +100,13 @@ export default async function HomePage() {
             {creators.map((s) => (
               <Link key={s.id} href={`/${s.handle}`} className="group flex flex-col items-center bg-stone px-4 py-8 text-center">
                 <Avatar name={s.store_name} src={s.avatar_url} color="#000" size={84} />
-                <p className="mt-4 text-[15px] group-hover:underline group-hover:underline-offset-4">{s.store_name}</p>
+                <p className="mt-4 text-base group-hover:underline group-hover:underline-offset-4">{s.store_name}</p>
                 {s.tagline && <p className="mt-1 line-clamp-2 text-sm text-muted">{s.tagline}</p>}
               </Link>
             ))}
           </div>
           <div className="mt-10 flex justify-center">
-            <ButtonLink href="/register?role=creator" size="sm" variant="secondary" className="h-[30px] px-4 text-[17px]">Sell on iMaket</ButtonLink>
+            <ButtonLink href="/register?role=creator" size="sm" variant="secondary" className="h-[30px] px-4 text-base">Sell on iMaket</ButtonLink>
           </div>
         </section>
       )}
