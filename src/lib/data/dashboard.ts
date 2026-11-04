@@ -1,5 +1,6 @@
 import "server-only";
 import { getAdminSupabase, getServerSupabase } from "@/lib/supabase/server";
+import { PUBLIC_PRODUCT_COLUMNS } from "@/lib/data/columns";
 import { isDemoMode } from "@/lib/env";
 import {
   DEMO_AFFILIATES, DEMO_COUPONS, DEMO_CREATORS, DEMO_CUSTOMER_ORDERS, DEMO_DOWNLOADS, DEMO_NOTIFICATIONS,
@@ -36,7 +37,7 @@ export async function getCreatorStats(creatorId: string, days = 30): Promise<Cre
       views30: 9420, conversion: 3.4,
       balance: { available: 5380.5, pending: 1890, lifetime: 48210, paid_out: 37550 },
       series: cur,
-      topProducts: products.map((p) => ({ id: p.id, title: p.title, sales: Math.round(p.sales_count / 10), revenue: Math.round(p.sales_count / 10) * p.price })),
+      topProducts: products.map((p) => ({ id: p.id, title: p.title, sales: Math.round((p.sales_count ?? 0) / 10), revenue: Math.round((p.sales_count ?? 0) / 10) * p.price })),
       trafficSources: [
         { source: "WhatsApp", visits: 3880 }, { source: "Instagram", visits: 2410 }, { source: "Direct", visits: 1530 },
         { source: "TikTok", visits: 960 }, { source: "Affiliates", visits: 640 },
@@ -49,7 +50,7 @@ export async function getCreatorStats(creatorId: string, days = 30): Promise<Cre
   const [{ data: series2 }, { data: bal }, { data: products }, { count: views }, { data: refs }] = await Promise.all([
     supabase.rpc("imaket_creator_daily_sales", { p_creator_id: creatorId, p_days: days * 2 }),
     supabase.from("imaket_creator_balances").select("*").eq("creator_id", creatorId).maybeSingle(),
-    supabase.from("imaket_products").select("id, title, sales_count, price").eq("creator_id", creatorId).order("sales_count", { ascending: false }).limit(5),
+    getAdminSupabase().from("imaket_products").select("id, title, sales_count, price").eq("creator_id", creatorId).order("sales_count", { ascending: false }).limit(5),
     supabase.from("imaket_analytics_events").select("id", { count: "exact", head: true })
       .eq("creator_id", creatorId).in("event", ["product_view", "store_view"]).gte("created_at", new Date(Date.now() - days * 86400000).toISOString()),
     supabase.from("imaket_analytics_events").select("referrer").eq("creator_id", creatorId).gte("created_at", since).limit(5000),
@@ -93,8 +94,8 @@ function classifyReferrer(ref: string | null) {
 
 export async function getCreatorProducts(creatorId: string): Promise<Product[]> {
   if (isDemoMode) return [...DEMO_PRODUCTS.filter((p) => p.creator_id === creatorId), { ...DEMO_PENDING_PRODUCTS[0], creator_id: creatorId }];
-  const supabase = (await getServerSupabase())!;
-  const { data } = await supabase.from("imaket_products").select("*, category:imaket_categories(id, slug, name)")
+  // the store owner's own products incl. private sales/view counts — callers pass session.creator.id
+  const { data } = await getAdminSupabase().from("imaket_products").select("*, category:imaket_categories(id, slug, name)")
     .eq("creator_id", creatorId).order("created_at", { ascending: false });
   return (data as Product[]) ?? [];
 }
@@ -182,7 +183,7 @@ export async function getWishlist(userId: string): Promise<Product[]> {
   if (isDemoMode) return DEMO_PRODUCTS.slice(2, 5);
   const supabase = (await getServerSupabase())!;
   const { data } = await supabase.from("imaket_wishlists")
-    .select("product:imaket_products(*, creator:imaket_creators(id, handle, store_name, avatar_url, verified))")
+    .select(`product:imaket_products(${PUBLIC_PRODUCT_COLUMNS}, creator:imaket_creators(id, handle, store_name, avatar_url, verified))`)
     .eq("user_id", userId);
   return ((data ?? []) as unknown as { product: Product }[]).map((r) => r.product).filter(Boolean);
 }
@@ -235,8 +236,7 @@ export async function getAdminStats(): Promise<AdminStats> {
 
 export async function getModerationQueue(): Promise<Product[]> {
   if (isDemoMode) return DEMO_PENDING_PRODUCTS;
-  const supabase = (await getServerSupabase())!;
-  const { data } = await supabase.from("imaket_products")
+  const { data } = await getAdminSupabase().from("imaket_products") // admin-only page (requireRole)
     .select("*, creator:imaket_creators(id, handle, store_name, avatar_url, verified), category:imaket_categories(id, slug, name)")
     .eq("status", "pending_review").order("updated_at", { ascending: true });
   return (data as Product[]) ?? [];
@@ -244,8 +244,7 @@ export async function getModerationQueue(): Promise<Product[]> {
 
 export async function getAllCreators(): Promise<Creator[]> {
   if (isDemoMode) return DEMO_CREATORS;
-  const supabase = (await getServerSupabase())!;
-  const { data } = await supabase.from("imaket_creators").select("*").order("created_at", { ascending: false }).limit(200);
+  const { data } = await getAdminSupabase().from("imaket_creators").select("*").order("created_at", { ascending: false }).limit(200); // admin-only page
   return (data as Creator[]) ?? [];
 }
 

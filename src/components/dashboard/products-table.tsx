@@ -66,7 +66,7 @@ export function ProductsTable({ products, categories, currency }: { products: Pr
               </td>
               <td data-label="Status"><StatusBadge status={p.status} /></td>
               <td data-label="Price" className="text-right tabular-nums">{formatMoney(p.price, p.currency)}</td>
-              <td data-label="Sales" className="text-right tabular-nums">{p.sales_count.toLocaleString()}</td>
+              <td data-label="Sales" className="text-right tabular-nums">{(p.sales_count ?? 0).toLocaleString()}</td>
               <td data-label="Stock" className="text-right tabular-nums">{p.track_inventory ? p.inventory_qty ?? 0 : "∞"}</td>
               <td className="relative text-right">
                 <button onClick={() => setMenu(menu === p.id ? null : p.id)} className="rounded-lg p-2 text-muted hover:bg-surface-2 hover:text-fg" aria-label={`Actions for ${p.title}`} aria-expanded={menu === p.id}>

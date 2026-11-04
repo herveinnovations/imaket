@@ -103,8 +103,9 @@ export interface Product {
   affiliate_commission_percent: number | null;
   rating_avg: number;
   rating_count: number;
-  sales_count: number;
-  view_count: number;
+  /** private: only present for the store owner (dashboard) and admins */
+  sales_count?: number;
+  view_count?: number;
   rejection_reason: string | null;
   audience?: "men" | "women" | "unisex" | null;
   refund?: string | null;

@@ -75,8 +75,8 @@ export function StorefrontEditor({ creator, products }: { creator: Creator; prod
             </div>
           </div>
           <div className="grid gap-6 sm:grid-cols-2">
-            <div><p className="mb-1.5 text-sm font-medium">Profile photo</p><CoverUpload value={s.avatar_url} onChange={(avatar_url) => up({ avatar_url })} /></div>
-            <div><p className="mb-1.5 text-sm font-medium">Banner</p><CoverUpload value={s.banner_url} onChange={(banner_url) => up({ banner_url })} /></div>
+            <div><p className="mb-1.5 text-sm font-medium">Profile photo</p><CoverUpload value={s.avatar_url} onChange={(avatar_url) => up({ avatar_url })} /><p className="mt-1.5 text-xs text-muted">Shown in full inside a circle. A square logo or photo looks best.</p></div>
+            <div><p className="mb-1.5 text-sm font-medium">Banner</p><CoverUpload value={s.banner_url} onChange={(banner_url) => up({ banner_url })} /><p className="mt-1.5 text-xs text-muted">Shown in full, never cropped. A wide image (about 1500 × 500) fills the space best.</p></div>
           </div>
         </section>
 
@@ -123,9 +123,18 @@ export function StorefrontEditor({ creator, products }: { creator: Creator; prod
       <aside className="xl:sticky xl:top-24 xl:self-start" aria-label="Preview">
         <p className="mb-2 text-sm text-muted">Preview</p>
         <div className="overflow-hidden rounded-3xl border bg-bg shadow-card">
-          <div className="h-24" style={{ background: s.banner_url ? `url(${s.banner_url}) center/cover` : s.brand_color }} />
-          <div className="px-5 pb-6">
-            <Avatar name={s.store_name} src={s.avatar_url} color={s.brand_color} size={72} className="-mt-9 border-4 border-bg" />
+          <div className="relative h-24 overflow-hidden" style={{ background: s.brand_color }}>
+            {s.banner_url && (
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.banner_url} alt="" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70 blur-xl" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.banner_url} alt="" className="relative h-full w-full object-contain" />
+              </>
+            )}
+          </div>
+          <div className="relative z-10 px-5 pb-6">
+            <Avatar name={s.store_name} src={s.avatar_url} color={s.brand_color} size={72} fit="contain" className="-mt-9 border-4 border-bg" />
             <p className="mt-3 flex items-center gap-1.5 font-display text-xl font-bold">{s.store_name || "Your store"}{creator.verified && <BadgeCheck className="h-5 w-5 text-brand" />}</p>
             <p className="text-sm text-muted">{s.tagline || "Your tagline"}</p>
             <p className="mt-3 line-clamp-4 text-sm leading-6">{s.bio}</p>

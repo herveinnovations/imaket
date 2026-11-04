@@ -3,6 +3,7 @@ import { fail, ok, parseBody } from "@/lib/api";
 import { getApiSession } from "@/lib/auth";
 import { getServerSupabase } from "@/lib/supabase/server";
 import { isDemoMode } from "@/lib/env";
+import { PUBLIC_CREATOR_COLUMNS } from "@/lib/data/columns";
 
 const schema = z.object({ handle: z.string().trim().toLowerCase().regex(/^[a-z0-9][a-z0-9_-]{1,30}[a-z0-9]$/, "Store links are 3–32 letters, numbers, - or _.") });
 
@@ -20,7 +21,7 @@ export async function POST(req: Request) {
   if (taken) return fail("That store link is taken.", 409);
   const { data, error } = await supabase.from("imaket_creators")
     .insert({ user_id: session.user.id, handle: body.data.handle, store_name: session.user.full_name ?? body.data.handle, country: session.user.country })
-    .select().single();
+    .select(PUBLIC_CREATOR_COLUMNS).single();
   if (error) return fail(error.message.includes("reserved") ? "That store link is reserved." : error.message, 400);
   if (session.user.role === "customer") await supabase.from("imaket_users").update({ role: "creator" }).eq("id", session.user.id); // allowed by guard trigger
   return ok({ creator: data }, { status: 201 });

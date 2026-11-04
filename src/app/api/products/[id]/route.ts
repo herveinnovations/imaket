@@ -4,6 +4,7 @@ import { getServerSupabase } from "@/lib/supabase/server";
 import { isDemoMode } from "@/lib/env";
 import { productSchema } from "@/lib/validation";
 import { productRow, saveProductChildren } from "@/lib/products";
+import { PUBLIC_PRODUCT_COLUMNS } from "@/lib/data/columns";
 
 type Ctx = { params: Promise<{ id: string }> };
 
@@ -11,7 +12,7 @@ export async function GET(_req: Request, { params }: Ctx) {
   const { id } = await params;
   if (isDemoMode) return ok({ product: null, demo: true });
   const supabase = (await getServerSupabase())!;
-  const { data, error } = await supabase.from("imaket_products").select("*, files:imaket_product_files(id, file_name, size_bytes, mime_type, storage_path), modules:imaket_course_modules(id, title, sort_order, lessons:imaket_course_lessons(id, title, summary, sort_order, duration_seconds, is_preview))").eq("id", id).maybeSingle();
+  const { data, error } = await supabase.from("imaket_products").select(`${PUBLIC_PRODUCT_COLUMNS}, files:imaket_product_files(id, file_name, size_bytes, mime_type, storage_path), modules:imaket_course_modules(id, title, sort_order, lessons:imaket_course_lessons(id, title, summary, sort_order, duration_seconds, is_preview))`).eq("id", id).maybeSingle();
   if (error || !data) return fail("Product not found", 404);
   return ok({ product: data });
 }

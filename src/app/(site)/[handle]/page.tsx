@@ -9,7 +9,7 @@ import { Avatar, EmptyState } from "@/components/ui/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { FollowButton } from "@/components/community/follow-button";
 import { getCreatorByHandle, getProducts } from "@/lib/data/catalog";
-import { formatCompact, formatMoney, PRODUCT_TYPE_LABEL } from "@/lib/utils";
+import { formatMoney, PRODUCT_TYPE_LABEL } from "@/lib/utils";
 import { Store } from "lucide-react";
 import type { Socials } from "@/lib/types";
 
@@ -42,11 +42,18 @@ export default async function StorefrontPage({ params }: { params: Params }) {
   return (
     <div>
       <AnalyticsBeacon event="store_view" creatorId={creator.id} />
-      {/* Banner: uploaded image, or a field of the creator's brand colour */}
-      <div className="relative h-44 sm:h-64" style={{ background: brand }}>
+      {/* Banner: the whole uploaded image (never cropped) over a blurred fill of itself,
+          or a field of the creator's brand colour */}
+      <div className="relative h-44 overflow-hidden sm:h-64 lg:h-80" style={{ background: brand }}>
         {creator.banner_url
-          // eslint-disable-next-line @next/next/no-img-element
-          ? <img src={creator.banner_url} alt="" className="h-full w-full object-cover" />
+          ? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={creator.banner_url} alt="" aria-hidden className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70 blur-2xl" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={creator.banner_url} alt={`${creator.store_name} banner`} className="relative h-full w-full object-contain" />
+            </>
+          )
           : (
             <svg className="absolute inset-0 h-full w-full opacity-30" aria-hidden>
               <defs><pattern id="sk-p" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="28" stroke="black" strokeWidth="1.5" /></pattern></defs>
@@ -56,9 +63,11 @@ export default async function StorefrontPage({ params }: { params: Params }) {
       </div>
 
       <div className="px-5">
-        <div className="-mt-14 flex flex-col gap-6 sm:-mt-16 md:flex-row md:items-end md:justify-between">
+        {/* relative z-10 keeps the profile picture above the banner it overlaps */}
+        <div className="relative z-10 -mt-14 flex flex-col gap-6 sm:-mt-16 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
-            <Avatar name={creator.store_name} src={creator.avatar_url} color="#000" size={120} className="border-[5px] border-white text-4xl" />
+            <Avatar name={creator.store_name} src={creator.avatar_url} color="#000" size={128} fit="contain"
+              className="border-[5px] border-white text-4xl shadow-[0_2px_12px_rgba(0,0,0,0.15)]" />
             <div className="pb-1">
               <h1 className="flex items-center gap-2 text-[2.05rem] sm:text-[2.6rem]">
                 {creator.store_name}
@@ -123,7 +132,7 @@ export default async function StorefrontPage({ params }: { params: Params }) {
             )}
             <dl className="grid grid-cols-2 gap-3">
               <div className="bg-lime p-4"><dt className="text-sm">Products</dt><dd className="mt-1 font-display text-3xl">{items.length}</dd></div>
-              <div className="bg-lime p-4"><dt className="text-sm">Sales</dt><dd className="mt-1 font-display text-3xl">{formatCompact(items.reduce((a, p) => a + p.sales_count, 0))}</dd></div>
+              <div className="bg-lime p-4"><dt className="text-sm">On iMaket since</dt><dd className="mt-1 font-display text-3xl">{new Date(creator.created_at).getFullYear()}</dd></div>
             </dl>
             <ButtonLink href="/register?role=creator" variant="secondary" className="w-full">Open your own store</ButtonLink>
           </aside>

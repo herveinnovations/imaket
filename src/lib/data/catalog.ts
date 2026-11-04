@@ -1,11 +1,12 @@
 import "server-only";
 import { getServerSupabase } from "@/lib/supabase/server";
+import { PUBLIC_CREATOR_COLUMNS, PUBLIC_PRODUCT_COLUMNS } from "@/lib/data/columns";
 import { isDemoMode } from "@/lib/env";
 import { DEMO_CATEGORIES, DEMO_CREATORS, DEMO_PRODUCTS, demoReviews } from "@/lib/demo-data";
 import type { Category, Creator, Product, ProductFilters, Review } from "@/lib/types";
 
 const PRODUCT_SELECT =
-  "*, creator:imaket_creators!inner(id, handle, store_name, avatar_url, verified, status), category:imaket_categories(id, slug, name)";
+  `${PUBLIC_PRODUCT_COLUMNS}, creator:imaket_creators!inner(id, handle, store_name, avatar_url, verified, status), category:imaket_categories(id, slug, name)`;
 
 export async function getCategories(): Promise<Category[]> {
   if (isDemoMode) return DEMO_CATEGORIES;
@@ -58,10 +59,10 @@ export async function getProducts(f: ProductFilters = {}): Promise<{ items: Prod
     case "price_asc": q = q.order("price", { ascending: true }); break;
     case "price_desc": q = q.order("price", { ascending: false }); break;
     case "rating": q = q.order("rating_avg", { ascending: false }); break;
-    default: q = q.order("featured", { ascending: false }).order("sales_count", { ascending: false });
+    default: q = q.order("featured", { ascending: false }).order("rating_count", { ascending: false }).order("published_at", { ascending: false });
   }
   const { data, count } = await q.range((page - 1) * size, page * size - 1);
-  return { items: (data as Product[]) ?? [], total: count ?? 0 };
+  return { items: (data as unknown as Product[]) ?? [], total: count ?? 0 };
 }
 
 function sortProducts(items: Product[], sort: ProductFilters["sort"]) {
@@ -71,7 +72,7 @@ function sortProducts(items: Product[], sort: ProductFilters["sort"]) {
     case "price_asc": return s.sort((a, b) => a.price - b.price);
     case "price_desc": return s.sort((a, b) => b.price - a.price);
     case "rating": return s.sort((a, b) => b.rating_avg - a.rating_avg);
-    default: return s.sort((a, b) => Number(b.featured) - Number(a.featured) || b.sales_count - a.sales_count);
+    default: return s.sort((a, b) => Number(b.featured) - Number(a.featured) || b.rating_count - a.rating_count || (b.published_at ?? "").localeCompare(a.published_at ?? ""));
   }
 }
 
@@ -84,7 +85,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
              modules:imaket_course_modules(id, title, sort_order, lessons:imaket_course_lessons(id, title, duration_seconds, is_preview, sort_order))`)
     .eq("slug", slug)
     .maybeSingle();
-  return (data as Product) ?? null;
+  return (data as unknown as Product) ?? null;
 }
 
 export async function getProductReviews(productId: string): Promise<Review[]> {
@@ -108,17 +109,17 @@ export async function getProductReviews(productId: string): Promise<Review[]> {
 export async function getCreatorByHandle(handle: string): Promise<Creator | null> {
   if (isDemoMode) return DEMO_CREATORS.find((c) => c.handle === handle.toLowerCase()) ?? null;
   const supabase = (await getServerSupabase())!;
-  const { data } = await supabase.from("imaket_creators").select("*").eq("handle", handle.toLowerCase()).eq("status", "active").maybeSingle();
-  return (data as Creator) ?? null;
+  const { data } = await supabase.from("imaket_creators").select(PUBLIC_CREATOR_COLUMNS).eq("handle", handle.toLowerCase()).eq("status", "active").maybeSingle();
+  return (data as unknown as Creator) ?? null;
 }
 
 export async function getFeaturedCreators(limit = 6): Promise<Creator[]> {
   if (isDemoMode) return DEMO_CREATORS.slice(0, limit);
   const supabase = (await getServerSupabase())!;
   const { data } = await supabase
-    .from("imaket_creators").select("*").eq("status", "active")
+    .from("imaket_creators").select(PUBLIC_CREATOR_COLUMNS).eq("status", "active")
     .order("verified", { ascending: false }).order("created_at", { ascending: true }).limit(limit);
-  return (data as Creator[]) ?? [];
+  return (data as unknown as Creator[]) ?? [];
 }
 
 export async function getRelatedProducts(p: Product, limit = 4): Promise<Product[]> {

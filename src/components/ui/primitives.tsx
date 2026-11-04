@@ -38,16 +38,21 @@ export function Skeleton({ className }: { className?: string }) {
 }
 
 // ─── Avatar ──────────────────────────────────────────────────────────
-export function Avatar({ name, src, color, size = 40, className }: { name?: string | null; src?: string | null; color?: string | null; size?: number; className?: string }) {
+/**
+ * Round avatar. fit="contain" shows the whole uploaded picture (logos, wide photos)
+ * inside the circle on white instead of cropping it to fill.
+ */
+export function Avatar({ name, src, color, size = 40, className, fit = "cover" }: { name?: string | null; src?: string | null; color?: string | null; size?: number; className?: string; fit?: "cover" | "contain" }) {
+  const contain = fit === "contain" && !!src;
   return (
     <span
       className={cn("inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-sans font-bold text-white", className)}
-      style={{ width: size, height: size, fontSize: size * 0.38, background: color ?? "#000" }}
+      style={{ width: size, height: size, fontSize: size * 0.38, background: contain ? "#fff" : color ?? "#000" }}
       aria-hidden={!name}
     >
       {src
         // eslint-disable-next-line @next/next/no-img-element
-        ? <img src={src} alt="" className="h-full w-full object-cover" />
+        ? <img src={src} alt="" className={contain ? "h-[72%] w-[72%] object-contain" : "h-full w-full object-cover"} />
         : initials(name)}
     </span>
   );

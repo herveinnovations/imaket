@@ -123,7 +123,7 @@ update public.imaket_order_items set fulfillment_status = 'completed';
 insert into _r (k, v) select 'fulfil', fulfillment_status from public.imaket_order_items;
 do $$ begin
   update public.imaket_products set sales_count = 9999, rating_avg = 1;
-  insert into _r (k, v) select 'counter tamper', sales_count || '/' || rating_avg from public.imaket_products;
+  insert into _r (k, v) select 'counter tamper (rating)', rating_avg::text from public.imaket_products;
 end $$;
 update public.imaket_reviews set creator_reply = 'Thanks!', rating = 1;
 insert into _r (k, v) select 'creator reply', rating || ' ' || creator_reply from public.imaket_reviews;
@@ -145,4 +145,5 @@ do $$ begin
   insert into _r (k, v) select 'delete buyer account', 'ok; order kept=' || (select count(*) from public.imaket_orders) || ' customer_id=' || coalesce((select customer_id::text from public.imaket_orders), 'null');
 exception when others then insert into _r (k, v) values ('delete buyer account', 'FAILED (BAD): ' || sqlerrm); end $$;
 reset role;
+insert into _r (k, v) select 'counter tamper (sales, server view)', sales_count::text from public.imaket_products;
 do $$ begin raise exception E'REHEARSAL RESULTS\n%', (select string_agg(n || '. ' || k || ': ' || coalesce(v, 'NULL'), E'\n' order by n) from _r); end $$;

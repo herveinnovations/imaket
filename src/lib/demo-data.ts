@@ -208,7 +208,7 @@ export const DEMO_PRODUCTS: Product[] = ([
 DEMO_CREATORS.forEach((cr) => {
   const mine = DEMO_PRODUCTS.filter((p) => p.creator_id === cr.id);
   cr.product_count = mine.length;
-  cr.sales_count = mine.reduce((a, p) => a + p.sales_count, 0);
+  cr.sales_count = mine.reduce((a, p) => a + (p.sales_count ?? 0), 0);
   cr.featured_product_ids = mine.filter((p) => p.featured).map((p) => p.id);
 });
 

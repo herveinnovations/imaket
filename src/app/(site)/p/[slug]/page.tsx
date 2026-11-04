@@ -101,7 +101,7 @@ export default async function ProductPage({ params }: { params: Params }) {
           {p.rating_count > 0 && (
             <a href="#reviews" className="mt-2 flex items-center gap-1.5 text-sm">
               <span className="flex" aria-hidden>{[1, 2, 3, 4, 5].map((n) => <Star key={n} className={`h-3.5 w-3.5 ${p.rating_avg >= n - 0.25 ? "fill-black text-black" : "text-black/25"}`} />)}</span>
-              {p.rating_avg.toFixed(1)} ({p.rating_count}) · {p.sales_count.toLocaleString()} sold
+              {p.rating_avg.toFixed(1)} ({p.rating_count} {p.rating_count === 1 ? "review" : "reviews"})
             </a>
           )}
 
