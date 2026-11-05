@@ -66,7 +66,7 @@ export function PurchasePanel({ product: p }: { product: Product }) {
 
       <div className="mt-6 space-y-3">
         <button disabled={soldOut} onClick={() => addToCart(false)}
-          className="h-10 w-full rounded-[20px] bg-brand text-base text-white hover:bg-[#006b20] disabled:opacity-50">
+          className="h-10 w-full rounded-[20px] bg-brand text-base text-white hover:bg-[#0B5C56] disabled:opacity-50">
           {soldOut ? "Out of Stock" : "Add to Cart"}
         </button>
         <div className="flex gap-3">

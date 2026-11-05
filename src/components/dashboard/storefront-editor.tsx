@@ -10,13 +10,13 @@ import { CoverUpload } from "./file-upload";
 import { cn, siteHost } from "@/lib/utils";
 import type { Creator, Product } from "@/lib/types";
 
-const SWATCHES = ["#D6FF38", "#000000", "#008528", "#E6E6E6", "#E6E7DA", "#1E3A8A", "#9D174D", "#C2410C"];
+const SWATCHES = ["#2DD4BF", "#000000", "#0F766E", "#E6E6E6", "#E3F1EE", "#1E3A8A", "#9D174D", "#C2410C"];
 
 export function StorefrontEditor({ creator, products }: { creator: Creator; products: Product[] }) {
   const router = useRouter();
   const [s, setS] = useState({
     store_name: creator.store_name, handle: creator.handle, tagline: creator.tagline ?? "", bio: creator.bio ?? "",
-    brand_color: creator.brand_color ?? "#D6FF38", avatar_url: creator.avatar_url, banner_url: creator.banner_url,
+    brand_color: creator.brand_color ?? "#2DD4BF", avatar_url: creator.avatar_url, banner_url: creator.banner_url,
     socials: { instagram: "", tiktok: "", x: "", youtube: "", website: "", whatsapp: "", ...creator.socials },
     featured_product_ids: creator.featured_product_ids ?? [],
     join_sitewide_sales: creator.join_sitewide_sales ?? true,

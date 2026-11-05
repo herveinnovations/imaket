@@ -18,7 +18,7 @@ export default async function MembersPage({ searchParams }: { searchParams: SP }
       <section className="flex min-h-[340px] flex-col items-center justify-center bg-white px-6 py-20 text-center">
         <h1 className="font-sans text-[1.65rem] font-normal tracking-normal">Log In to Connect With Members</h1>
         <p className="mt-4 max-w-[22rem] text-base">View and follow other members, leave comments &amp; more.</p>
-        <Link href="/login?next=/members" className="mt-8 inline-flex h-10 items-center bg-brand px-14 text-base text-white hover:bg-[#006b20]">Log In</Link>
+        <Link href="/login?next=/members" className="mt-8 inline-flex h-10 items-center bg-brand px-14 text-base text-white hover:bg-[#0B5C56]">Log In</Link>
       </section>
     );
   }

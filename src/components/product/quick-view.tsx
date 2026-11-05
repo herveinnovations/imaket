@@ -60,7 +60,7 @@ function QuickViewModal({ product: p, open, onClose }: { product: Product; open:
                 </fieldset>
               )}
               <button disabled={soldOut} onClick={() => { add(p, { quantity: qty, customPrice: p.pay_what_you_want ? p.price : undefined }); onClose(); }}
-                className="mt-6 h-10 w-full rounded-full bg-brand text-base text-white hover:bg-[#006b20] disabled:opacity-50">
+                className="mt-6 h-10 w-full rounded-full bg-brand text-base text-white hover:bg-[#0B5C56] disabled:opacity-50">
                 {soldOut ? "Out of Stock" : "Add to Cart"}
               </button>
               <Link href={`/p/${p.slug}`} onClick={onClose} className="mt-4 text-base underline underline-offset-4">View More Details</Link>

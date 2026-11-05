@@ -4,20 +4,20 @@
 
 @layer base {
   :root, .dark {
-    /* iMaket × Wix Harmony streetwear palette */
+    /* iMaket mint & teal palette */
     --bg: 255 255 255;
     --surface: 255 255 255;
     --surface-2: 230 230 230;      /* #E6E6E6 panels behind photos */
-    --stone: 230 231 218;          /* #E6E7DA */
+    --stone: 227 241 238;          /* #E3F1EE */
     --border: 0 0 0;
     --fg: 0 0 0;
     --muted: 82 82 82;
-    --brand: 0 133 40;             /* #008528 green buttons */
+    --brand: 15 118 110;           /* #0F766E teal buttons */
     --brand-fg: 255 255 255;
-    --brand-soft: 236 255 166;     /* pale lime for selected states */
-    --lime: 214 255 56;            /* #D6FF38 header, footer, promo */
-    --accent: 214 255 56;
-    --success: 0 133 40;
+    --brand-soft: 204 251 241;     /* pale mint for selected states */
+    --lime: 45 212 191;            /* #2DD4BF mint: header, footer, promo */
+    --accent: 45 212 191;
+    --success: 15 118 110;
     --warning: 161 98 7;
     --danger: 204 24 24;
     color-scheme: light;

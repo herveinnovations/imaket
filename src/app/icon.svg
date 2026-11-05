@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <rect width="200" height="200" rx="44" fill="#D6FF38"/>
+  <rect width="200" height="200" rx="44" fill="#2DD4BF"/>
   <g transform="translate(4 52) scale(0.96)">
     <defs><clipPath id="c"><ellipse cx="100" cy="45" rx="94" ry="41"/></clipPath></defs>
     <ellipse cx="100" cy="45" rx="94" ry="41" fill="#fff"/>

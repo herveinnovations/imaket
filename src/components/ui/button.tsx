@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 // Wix Harmony buttons: green pill (primary), black-outline pill (secondary), black / lime solids.
 const variants = {
-  primary: "bg-brand text-brand-fg hover:bg-[#006b20]",
+  primary: "bg-brand text-brand-fg hover:bg-[#0B5C56]",
   secondary: "bg-surface text-fg border border-fg hover:bg-fg hover:text-bg",
   ghost: "text-fg hover:bg-surface-2",
   accent: "bg-lime text-black hover:bg-black hover:text-lime",

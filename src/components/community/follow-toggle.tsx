@@ -10,7 +10,7 @@ export function FollowToggle({ userId, initial, signedIn, className }: { userId:
   const [following, setFollowing] = useState(initial);
   const [pending, start] = useTransition();
   const cls = cn("inline-flex h-9 items-center rounded-full px-5 text-base transition-colors disabled:opacity-60",
-    following ? "border border-black bg-white hover:bg-black hover:text-white" : "bg-brand text-white hover:bg-[#006b20]", className);
+    following ? "border border-black bg-white hover:bg-black hover:text-white" : "bg-brand text-white hover:bg-[#0B5C56]", className);
 
   if (!signedIn) return <Link href="/login?next=/members" className={cls}>Follow</Link>;
   return (
