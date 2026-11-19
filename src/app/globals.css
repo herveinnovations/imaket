@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root, .dark {
+    /* iMaket mint & teal palette */
+    --bg: 255 255 255;
+    --surface: 255 255 255;
+    --surface-2: 230 230 230;      /* #E6E6E6 panels behind photos */
+    --stone: 227 241 238;          /* #E3F1EE */
+    --border: 0 0 0;
+    --fg: 0 0 0;
+    --muted: 82 82 82;
+    --brand: 15 118 110;           /* #0F766E teal buttons */
+    --brand-fg: 255 255 255;
+    --brand-soft: 204 251 241;     /* pale mint for selected states */
+    --lime: 45 212 191;            /* #2DD4BF mint: header, footer, promo */
+    --accent: 45 212 191;
+    --success: 15 118 110;
+    --warning: 161 98 7;
+    --danger: 204 24 24;
+    color-scheme: light;
+  }
+
+  * { @apply border-border/15; }
+  html { -webkit-tap-highlight-color: transparent; }
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+  /* Outfit headings, EO Robotics Lab style: semibold, tight tracking */
+  h1, h2, h3, h4, h5, h6 { @apply font-display; font-weight: 600; line-height: 1.25; letter-spacing: -0.02em; }
+  h1, h2, .font-display { letter-spacing: -0.03em; line-height: 1.1; }
+  .font-display { font-weight: 600; }
+  :focus-visible { @apply outline-none ring-2 ring-fg ring-offset-2 ring-offset-bg; }
+  ::selection { background: rgb(var(--lime)); color: #000; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  .card { @apply border border-fg/15 bg-surface; }
+  .input {
+    @apply h-11 w-full border border-fg/60 bg-surface px-3.5 text-base text-fg placeholder:text-muted/80
+           transition-colors focus:border-fg focus:outline-none focus:ring-1 focus:ring-fg
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .wix-h { @apply font-display text-[1.85rem] leading-[1.1] tracking-[-0.03em] sm:text-[2.05rem]; }
+  .wix-link { @apply underline-offset-4 hover:underline; }
+  .label { @apply mb-1.5 block text-sm font-medium text-fg; }
+  .prose-sk { @apply max-w-[68ch] text-base leading-[1.6] text-fg/90; }
+  .prose-sk p { @apply mb-4; }
+  .prose-sk ul { @apply mb-4 list-disc space-y-1 pl-5; }
+  .prose-sk strong { @apply font-semibold text-fg; }
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+}
+
+/* Page loader — from Uiverse.io by choudhary-usman */
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  --c: linear-gradient(#000 0 0);
+  --m: radial-gradient(farthest-side, #000 90%, #0000);
+  background: var(--c), var(--m), var(--c);
+  background-size: 16px 8px, 10px 10px;
+  background-repeat: no-repeat;
+  animation: l20-1 1s infinite linear, l20-2 4s infinite linear -0.4s;
+}
+@keyframes l20-1 {
+  0%, 10% { background-position: calc(50% - 8px) 50%, 50% -15px, calc(50% + 8px) 50%; }
+  33% { background-position: -20px 50%, 50% 50%, calc(100% + 20px) 50%; }
+  66% { background-position: -20px 50%, 50% calc(100% + 15px), calc(100% + 20px) 50%; }
+  80%, 100% { background-position: calc(50% - 8px) 50%, 50% calc(100% + 15px), calc(50% + 8px) 50%; }
+}
+@keyframes l20-2 {
+  0%, 24.99% { transform: rotate(0); }
+  25%, 49.99% { transform: rotate(90deg); }
+  50%, 74.99% { transform: rotate(180deg); }
+  75%, 100% { transform: rotate(270deg); }
+}
+/* keep the loader moving even when the visitor prefers reduced motion (it's the only progress signal) */
+@media (prefers-reduced-motion: reduce) {
+  .loader { animation-duration: 1s, 4s !important; }
+}

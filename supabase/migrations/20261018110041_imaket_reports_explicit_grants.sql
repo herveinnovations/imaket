@@ -1,0 +1,1 @@
+begin;revoke all on public.imaket_reports from anon,authenticated;grant select on public.imaket_reports to authenticated;grant insert(user_id,listing,reason,details) on public.imaket_reports to authenticated;grant update(status) on public.imaket_reports to authenticated;commit;
