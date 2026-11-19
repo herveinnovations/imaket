@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Providers } from "@/components/providers";
+import { PwaSetup } from "@/components/pwa/install-app";
 import { env } from "@/lib/env";
 import "./globals.css";
 
@@ -14,6 +15,9 @@ export const metadata: Metadata = {
   description:
     "Sell e-books, courses, presets, coaching, event tickets and physical goods from one storefront. Customers pay with mobile money or card.",
   openGraph: { type: "website", siteName: env.appName },
+  applicationName: "iMaket",
+  appleWebApp: { capable: true, title: "iMaket", statusBarStyle: "default" },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
@@ -27,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning className={outfit.variable}>
       <body>
         <Providers>{children}</Providers>
+        <PwaSetup />
       </body>
     </html>
   );

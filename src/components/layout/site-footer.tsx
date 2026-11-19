@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LogoMark } from "./logo";
 import { NewsletterLink } from "@/components/marketing/newsletter";
 import { getSiteContent } from "@/lib/site-content";
+import { InstallAppButton } from "@/components/pwa/install-app";
 
 const POLICIES: [string, string][] = [
   ["/policies/refund", "Refund Policy"],
@@ -51,6 +52,7 @@ export async function SiteFooter() {
               <li><NewsletterLink className={link}>Subscribe</NewsletterLink></li>
               <li><Link href="/faq" className={link}>FAQ</Link></li>
               <li><Link href="/register?role=creator" className={link}>Sell on iMaket</Link></li>
+              <li><InstallAppButton className={link} label="Install the app" /></li>
             </ul>
           </div>
           <Link href="/" aria-label="iMaket home" className="self-start sm:absolute sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">

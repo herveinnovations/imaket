@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Search, X } from "lucide-react";
 import { LogoMark } from "./logo";
+import { InstallAppButton } from "@/components/pwa/install-app";
 
 const ITEMS: [string, string][] = [
   ["/marketplace", "All Products"],
@@ -45,6 +46,7 @@ export function MobileNav({ signedIn }: { signedIn: boolean }) {
                 ))}
                 <li><Link href={signedIn ? "/dashboard" : "/login"} onClick={close} className="block py-2 font-display text-[2rem] leading-tight tracking-[-0.03em]">{signedIn ? "My Account" : "Log In"}</Link></li>
               </ul>
+              <InstallAppButton className="mt-6 h-11 rounded-full border-2 border-black bg-white px-5 text-base font-semibold" />
               <form action="/marketplace" className="relative mt-8" role="search" onSubmit={close}>
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2" />
                 <input name="q" type="search" placeholder="Search products and stores" aria-label="Search"
