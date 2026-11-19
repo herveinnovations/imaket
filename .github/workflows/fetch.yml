@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           mkdir -p ad-img
-          while read -r name url; do curl -fsSL "$url" -o "ad-img/$name.png"; done < urls.txt
+          while read -r name url; do curl -fsSL "$url" -o "ad-img/$name"; done < urls.txt
           ls -la ad-img
           git config user.name "Claude"; git config user.email "noreply@anthropic.com"
           git add ad-img && git commit -m "Ad product photos [assets]" && git push
