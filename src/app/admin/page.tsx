@@ -39,7 +39,7 @@ export default async function AdminOverview() {
         </Panel>
       </div>
 
-      <Panel title="Latest transactions" className="mt-6" action={<Link href="/admin/transactions" className="text-sm text-brand hover:underline">All transactions</Link>}>
+      <Panel title="Latest transactions" className="mt-6" action={<Link href="/admin/transactions" className="text-sm text-deep hover:underline">All transactions</Link>}>
         <ul className="divide-y">
           {orders.map((o) => (
             <li key={o.id} className="flex flex-wrap items-center gap-x-4 gap-y-1 py-3">

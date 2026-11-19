@@ -8,7 +8,7 @@ export default async function VerifyEmailPage({ searchParams }: { searchParams: 
   const { email, demo } = await searchParams;
   return (
     <div className="text-center">
-      <MailCheck className="mx-auto h-14 w-14 text-brand" strokeWidth={1.5} />
+      <MailCheck className="mx-auto h-14 w-14 text-deep" strokeWidth={1.5} />
       <h1 className="mt-6 text-[2.4rem]">Check your inbox</h1>
       <p className="mt-3 text-muted">
         We sent a confirmation link to {email ? <strong className="text-fg">{email}</strong> : "your email"}.

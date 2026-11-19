@@ -79,7 +79,7 @@ export function PayoutMethodForm({ method, country }: { method: PayoutMethod | n
       <div className="grid grid-cols-2 gap-2">
         {([["mobile_money", "Mobile money", Smartphone], ["bank", "Bank account", Banknote]] as const).map(([t, l, I]) => (
           <button key={t} type="button" onClick={() => setType(t)} aria-pressed={type === t}
-            className={cn("flex items-center gap-2 rounded-xl border p-3 text-sm font-medium", type === t ? "border-brand bg-brand-soft text-brand" : "hover:border-fg/30")}>
+            className={cn("flex items-center gap-2 rounded-xl border p-3 text-sm font-medium", type === t ? "border-deep bg-brand-soft text-deep" : "hover:border-fg/30")}>
             <I className="h-4 w-4" /> {l}
           </button>
         ))}

@@ -4,26 +4,30 @@
 
 @layer base {
   :root, .dark {
-    /* iMaket mint & teal palette */
+    /* iMaket sky & sunshine palette */
     --bg: 255 255 255;
     --surface: 255 255 255;
     --surface-2: 230 230 230;      /* #E6E6E6 panels behind photos */
-    --stone: 227 241 238;          /* #E3F1EE */
+    --stone: 230 245 250;          /* #E6F5FA pale sky */
     --border: 0 0 0;
     --fg: 0 0 0;
     --muted: 82 82 82;
-    --brand: 15 118 110;           /* #0F766E teal buttons */
-    --brand-fg: 255 255 255;
-    --brand-soft: 204 251 241;     /* pale mint for selected states */
-    --lime: 45 212 191;            /* #2DD4BF mint: header, footer, promo */
-    --accent: 45 212 191;
-    --success: 15 118 110;
+    --brand: 248 212 99;           /* #F8D463 sunshine-yellow buttons */
+    --brand-fg: 18 52 59;          /* #12343B navy text on yellow */
+    --deep: 29 107 130;            /* #1D6B82 deep sky: links, accents on white */
+    --brand-soft: 255 243 205;     /* pale yellow for selected states */
+    --lime: 84 185 210;            /* #54B9D2 sky blue: header, footer, promo */
+    --accent: 84 185 210;
+    --success: 29 107 130;
     --warning: 161 98 7;
     --danger: 204 24 24;
     color-scheme: light;
   }
 
   * { @apply border-border/15; }
+  /* navy text and badges on the sky-blue bars (header, footer, promos) */
+  .bg-lime, .bg-lime .text-black { color: #12343B; }
+  .bg-lime .bg-black { background-color: #12343B; }
   html { -webkit-tap-highlight-color: transparent; }
   body {
     @apply bg-bg text-fg font-sans antialiased;

@@ -24,7 +24,7 @@ export default async function CustomerHome() {
 
       <div className="mb-4 flex items-end justify-between">
         <h2 className="text-xl font-bold">Recently bought</h2>
-        <Link href="/dashboard/downloads" className="text-sm text-brand hover:underline">Open library</Link>
+        <Link href="/dashboard/downloads" className="text-sm text-deep hover:underline">Open library</Link>
       </div>
       {downloads.length ? <Library items={downloads.slice(0, 4)} /> : (
         <EmptyState icon={LibraryIcon} title="Nothing here yet" body="Things you buy show up here, ready to download." action={<ButtonLink href="/marketplace">Browse the marketplace</ButtonLink>} />

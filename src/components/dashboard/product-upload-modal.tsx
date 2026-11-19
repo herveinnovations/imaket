@@ -160,8 +160,8 @@ export function ProductUploadModal({ open, onClose, categories, currency, produc
             <div className="grid gap-3 sm:grid-cols-2">
               {TYPES.map((t) => (
                 <button key={t.type} type="button" onClick={() => { setD(empty(t.type)); setStep(1); }}
-                  className="flex items-start gap-3 rounded-2xl border p-4 text-left hover:border-brand hover:bg-brand-soft/40">
-                  <t.icon className="mt-0.5 h-5 w-5 text-brand" />
+                  className="flex items-start gap-3 rounded-2xl border p-4 text-left hover:border-deep hover:bg-brand-soft/40">
+                  <t.icon className="mt-0.5 h-5 w-5 text-deep" />
                   <span><span className="block font-medium">{PRODUCT_TYPE_LABEL[t.type]}</span><span className="text-sm text-muted">{t.blurb}</span></span>
                 </button>
               ))}
@@ -233,14 +233,14 @@ export function ProductUploadModal({ open, onClose, categories, currency, produc
                             <input className="input h-9 text-sm" value={l.title} aria-label={`Lesson ${li + 1} title`}
                               onChange={(e) => up({ modules: d.modules.map((x, i) => i !== mi ? x : { ...x, lessons: x.lessons.map((y, j) => (j === li ? { ...y, title: e.target.value } : y)) }) })} />
                             <label className="flex shrink-0 items-center gap-1.5 text-xs text-muted">
-                              <input type="checkbox" checked={l.is_preview} className="accent-[rgb(var(--brand))]"
+                              <input type="checkbox" checked={l.is_preview} className="accent-[rgb(var(--deep))]"
                                 onChange={(e) => up({ modules: d.modules.map((x, i) => i !== mi ? x : { ...x, lessons: x.lessons.map((y, j) => (j === li ? { ...y, is_preview: e.target.checked } : y)) }) })} />
                               Free preview
                             </label>
                           </li>
                         ))}
                       </ul>
-                      <button type="button" className="mt-2 pl-3 text-sm text-brand hover:underline"
+                      <button type="button" className="mt-2 pl-3 text-sm text-deep hover:underline"
                         onClick={() => up({ modules: d.modules.map((x, i) => (i === mi ? { ...x, lessons: [...x.lessons, { title: `Lesson ${x.lessons.length + 1}`, is_preview: false }] } : x)) })}>
                         Add lesson
                       </button>

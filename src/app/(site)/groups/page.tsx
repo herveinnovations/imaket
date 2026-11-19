@@ -34,7 +34,7 @@ export default async function GroupsFeedPage({ searchParams }: { searchParams: S
             <div className="border border-black/30 px-6 py-16 text-center">
               <p className="text-xl">Be the first to post</p>
               <p className="mt-2 text-base">Create a post and start connecting with other members.</p>
-              {!session && <Link href="/login?next=/groups" className="mt-6 inline-flex h-10 items-center rounded-full bg-brand px-6 text-white">Log In to Post</Link>}
+              {!session && <Link href="/login?next=/groups" className="mt-6 inline-flex h-10 items-center rounded-full bg-brand px-6 text-brand-fg">Log In to Post</Link>}
               {session && activeGroups.length === 0 && <p className="mt-4 text-sm">Join a group on the right to start posting.</p>}
             </div>
           ) : posts.map((p) => {

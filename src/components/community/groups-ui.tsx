@@ -17,7 +17,7 @@ export function JoinButton({ groupId, privacy, state, signedIn, className }: {
   groupId: string; privacy: "public" | "private"; state: "none" | "pending" | "member" | "admin"; signedIn: boolean; className?: string;
 }) {
   const [pending, start] = useTransition();
-  if (!signedIn) return <Link href="/login?next=/groups" className={cn(pill, "bg-brand text-white hover:bg-[#0B5C56]", className)}>{privacy === "private" ? "Request To Join" : "Join Group"}</Link>;
+  if (!signedIn) return <Link href="/login?next=/groups" className={cn(pill, "bg-brand text-brand-fg hover:bg-[#EEC23F]", className)}>{privacy === "private" ? "Request To Join" : "Join Group"}</Link>;
   if (state === "admin") return <span className={cn(pill, "border border-black", className)}>Admin</span>;
   const run = (fn: () => Promise<ActionResult>) => start(async () => {
     const r = await fn();
@@ -26,7 +26,7 @@ export function JoinButton({ groupId, privacy, state, signedIn, className }: {
   if (state === "member") return <button disabled={pending} onClick={() => run(() => leaveGroup(groupId))} className={cn(pill, "border border-black bg-white hover:bg-black hover:text-white", className)}>Joined ✓</button>;
   if (state === "pending") return <button disabled={pending} onClick={() => run(() => leaveGroup(groupId))} className={cn(pill, "border border-black bg-white", className)} title="Cancel request">Requested</button>;
   return (
-    <button disabled={pending} onClick={() => run(() => joinGroup(groupId))} className={cn(pill, "bg-brand text-white hover:bg-[#0B5C56]", className)}>
+    <button disabled={pending} onClick={() => run(() => joinGroup(groupId))} className={cn(pill, "bg-brand text-brand-fg hover:bg-[#EEC23F]", className)}>
       {privacy === "private" ? "Request To Join" : "Join Group"}
     </button>
   );
@@ -139,7 +139,7 @@ export function CreateGroupButton({ signedIn }: { signedIn: boolean }) {
             <label className="flex items-start gap-2 py-1 text-base"><input type="radio" name="privacy" value="public" defaultChecked className="mt-1 accent-black" /> <span><b>Public</b> — anyone can see posts and join.</span></label>
             <label className="flex items-start gap-2 py-1 text-base"><input type="radio" name="privacy" value="private" className="mt-1 accent-black" /> <span><b>Private</b> — only members see posts; you approve requests.</span></label>
           </fieldset>
-          <button disabled={pending} className={cn(pill, "w-full bg-brand text-white hover:bg-[#0B5C56]")}>{pending ? "Creating…" : "Create Group"}</button>
+          <button disabled={pending} className={cn(pill, "w-full bg-brand text-brand-fg hover:bg-[#EEC23F]")}>{pending ? "Creating…" : "Create Group"}</button>
         </form>
       </Modal>
     </>
@@ -153,7 +153,7 @@ export function RequestRow({ groupId, userId, name, avatar }: { groupId: string;
     <li className="flex items-center gap-3 py-2">
       <Avatar name={name} src={avatar} size={32} />
       <span className="flex-1 truncate text-base">{name ?? "Member"}</span>
-      <button disabled={pending} onClick={() => run(true)} className="h-8 rounded-full bg-brand px-3 text-sm text-white">Approve</button>
+      <button disabled={pending} onClick={() => run(true)} className="h-8 rounded-full bg-brand px-3 text-sm text-brand-fg">Approve</button>
       <button disabled={pending} onClick={() => run(false)} className="h-8 rounded-full border border-black px-3 text-sm">Decline</button>
     </li>
   );

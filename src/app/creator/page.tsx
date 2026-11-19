@@ -33,7 +33,7 @@ export default async function CreatorOverview() {
       </div>
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[1.7fr_1fr]">
-        <Panel title="Earnings, last 30 days" action={<Link href="/creator/analytics" className="text-sm text-brand hover:underline">Full analytics</Link>}>
+        <Panel title="Earnings, last 30 days" action={<Link href="/creator/analytics" className="text-sm text-deep hover:underline">Full analytics</Link>}>
           <RevenueChart data={stats.series as unknown as Record<string, number | string>[]} currency={cur} />
         </Panel>
         <Panel title="Best sellers">
@@ -56,7 +56,7 @@ export default async function CreatorOverview() {
         </Panel>
       </div>
 
-      <Panel title="Recent orders" className="mt-6" action={<Link href="/creator/orders" className="text-sm text-brand hover:underline">All orders</Link>}>
+      <Panel title="Recent orders" className="mt-6" action={<Link href="/creator/orders" className="text-sm text-deep hover:underline">All orders</Link>}>
         {orders.length === 0 ? (
           <EmptyState icon={Receipt} title="No orders yet" body="Share your store link on WhatsApp and Instagram to get your first sale."
             action={<ButtonLink href={`/${creator.handle}`} variant="secondary">View your store</ButtonLink>} />

@@ -58,7 +58,7 @@ export function NotificationDropdown({ userId, initial }: { userId: string; init
             className="absolute right-0 mt-2 w-[min(380px,calc(100vw-2rem))] origin-top-right overflow-hidden rounded-2xl border bg-surface shadow-lift">
             <div className="flex items-center justify-between border-b px-4 py-3">
               <p className="font-semibold">Notifications</p>
-              {unread > 0 && <button onClick={markAllRead} className="text-sm text-brand hover:underline">Mark all as read</button>}
+              {unread > 0 && <button onClick={markAllRead} className="text-sm text-deep hover:underline">Mark all as read</button>}
             </div>
             <ul className="max-h-[420px] divide-y overflow-y-auto">
               {items.length === 0 && <li className="px-4 py-10 text-center text-sm text-muted">You&apos;re all caught up.</li>}

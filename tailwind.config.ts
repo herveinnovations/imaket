@@ -19,6 +19,7 @@ const config: Config = {
           soft: "rgb(var(--brand-soft) / <alpha-value>)",
         },
         accent: "rgb(var(--accent) / <alpha-value>)",
+        deep: "rgb(var(--deep) / <alpha-value>)",
         lime: "rgb(var(--lime) / <alpha-value>)",
         stone: "rgb(var(--stone) / <alpha-value>)",
         success: "rgb(var(--success) / <alpha-value>)",

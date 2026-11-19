@@ -60,7 +60,7 @@ export function CoverUpload({ value, onChange }: { value: string | null; onChang
       <span className="label">Cover image</span>
       <button type="button" onClick={() => input.current?.click()}
         onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); pick(e.dataTransfer.files[0]); }}
-        className="relative flex aspect-[4/3] w-full max-w-[260px] flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border-2 border-dashed bg-surface-2/40 text-sm text-muted hover:border-brand hover:text-brand">
+        className="relative flex aspect-[4/3] w-full max-w-[260px] flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border-2 border-dashed bg-surface-2/40 text-sm text-muted hover:border-deep hover:text-deep">
         {value
           // eslint-disable-next-line @next/next/no-img-element
           ? <img src={value} alt="Cover preview" className="absolute inset-0 h-full w-full object-cover" />
@@ -104,8 +104,8 @@ export function FilesUpload({ files, onChange, accept, onUploadingChange }: {
     <div>
       <button type="button" onClick={() => input.current?.click()}
         onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); pick(e.dataTransfer.files); }}
-        className="flex w-full flex-col items-center gap-2 rounded-2xl border-2 border-dashed px-6 py-8 text-center hover:border-brand">
-        <UploadCloud className="h-7 w-7 text-brand" />
+        className="flex w-full flex-col items-center gap-2 rounded-2xl border-2 border-dashed px-6 py-8 text-center hover:border-deep">
+        <UploadCloud className="h-7 w-7 text-deep" />
         <span className="font-medium">Drop files here or browse</span>
         <span className="text-sm text-muted">PDF, ZIP, MP4, MP3, images — up to {MAX_FILE_LABEL} each. Buyers get them after paying.</span>
       </button>

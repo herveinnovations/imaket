@@ -28,7 +28,7 @@ export function PendingPayment({ orderId }: { orderId: string }) {
   return (
     <div className="container flex max-w-md flex-col items-center py-24 text-center">
       <motion.div animate={state === "waiting" ? { rotate: [0, -8, 8, -8, 0] } : {}} transition={{ repeat: Infinity, duration: 1.4, repeatDelay: 1.2 }}>
-        <Smartphone className="h-16 w-16 text-brand" strokeWidth={1.5} />
+        <Smartphone className="h-16 w-16 text-deep" strokeWidth={1.5} />
       </motion.div>
       {state === "waiting" && <>
         <h1 className="mt-6 text-3xl font-bold">Check your phone</h1>

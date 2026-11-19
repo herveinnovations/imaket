@@ -12,7 +12,7 @@ export function CopyField({ value }: { value: string }) {
     <div className="flex max-w-xl gap-2">
       <input readOnly value={value} className="input h-10 font-mono text-sm" aria-label="Link" onFocus={(e) => e.target.select()} />
       <Button size="sm" variant="secondary" className="h-10" onClick={async () => { await navigator.clipboard.writeText(value).catch(() => {}); setCopied(true); setTimeout(() => setCopied(false), 1500); }}>
-        {copied ? <Check className="h-4 w-4 text-brand" /> : <Copy className="h-4 w-4" />} {copied ? "Copied" : "Copy"}
+        {copied ? <Check className="h-4 w-4 text-deep" /> : <Copy className="h-4 w-4" />} {copied ? "Copied" : "Copy"}
       </Button>
     </div>
   );

@@ -72,7 +72,7 @@ export function RegisterForm({ defaultRole }: { defaultRole: "creator" | "custom
       {role === "creator" && (
         <div>
           <label htmlFor="handle" className="label">Store link</label>
-          <div className="flex items-center rounded-xl border bg-surface focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/15">
+          <div className="flex items-center rounded-xl border bg-surface focus-within:border-deep focus-within:ring-4 focus-within:ring-deep/15">
             <span className="pl-3.5 text-base text-muted">{siteHost()}/</span>
             <input id="handle" name="handle" required value={handle} onChange={(e) => setHandle(e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, ""))}
               className="h-11 min-w-0 flex-1 bg-transparent pr-3 text-base outline-none" placeholder="yourname" maxLength={32} />

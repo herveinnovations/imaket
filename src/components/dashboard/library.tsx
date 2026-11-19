@@ -45,7 +45,7 @@ export function Library({ items }: { items: DL[] }) {
                       <span className="min-w-0 flex-1 truncate">{f.file_name}</span>
                       <span className="text-xs text-muted">{formatBytes(f.size_bytes)}</span>
                       <button onClick={() => download(d, f.id)} disabled={busy === f.id || !!expired || left === 0}
-                        className="rounded-lg p-1.5 text-brand hover:bg-brand-soft disabled:opacity-40" aria-label={`Download ${f.file_name}`}>
+                        className="rounded-lg p-1.5 text-deep hover:bg-brand-soft disabled:opacity-40" aria-label={`Download ${f.file_name}`}>
                         <Download className="h-4 w-4" />
                       </button>
                     </li>

@@ -35,7 +35,7 @@ export default async function CustomersPage() {
                 <td data-label="">
                   <div className="flex items-center gap-3">
                     <Avatar name={c.name ?? c.email} size={34} color="#5C637A" />
-                    <div><p className="font-medium">{c.name ?? "—"}</p><a href={`mailto:${c.email}`} className="text-xs text-muted hover:text-brand">{c.email}</a></div>
+                    <div><p className="font-medium">{c.name ?? "—"}</p><a href={`mailto:${c.email}`} className="text-xs text-muted hover:text-deep">{c.email}</a></div>
                   </div>
                 </td>
                 <td data-label="Orders" className="text-right tabular-nums">{c.orders}</td>

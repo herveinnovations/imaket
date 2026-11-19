@@ -177,7 +177,7 @@ export function CheckoutForm({
         <section aria-labelledby="pay-h">
           <h2 id="pay-h" className="text-xl font-semibold">Payment</h2>
           {isFree ? (
-            <p className="mt-4 rounded-xl bg-brand-soft p-4 text-sm text-brand">Nothing to pay. Your order total is {formatMoney(0, activeCurrency)}, so no payment details are needed.</p>
+            <p className="mt-4 rounded-xl bg-brand-soft p-4 text-sm text-deep">Nothing to pay. Your order total is {formatMoney(0, activeCurrency)}, so no payment details are needed.</p>
           ) : available.length === 0 ? (
             <p className="mt-4 rounded-xl border p-4 text-sm text-muted">No payment method is set up for {activeCurrency} yet. The store owner needs to enable one.</p>
           ) : (
@@ -186,9 +186,9 @@ export function CheckoutForm({
                 const ui = METHOD_UI[m.id] ?? { title: m.label, sub: "", icon: CreditCard };
                 const on = m.id === activeMethod;
                 return (
-                  <div key={m.id} className={cn("rounded-2xl border bg-surface transition-colors", on && "border-brand ring-4 ring-brand/10")}>
+                  <div key={m.id} className={cn("rounded-2xl border bg-surface transition-colors", on && "border-deep ring-4 ring-deep/10")}>
                     <button type="button" role="radio" aria-checked={on} onClick={() => setMethod(m.id)} className="flex w-full items-center gap-4 p-4 text-left">
-                      <span className={cn("grid h-5 w-5 shrink-0 place-items-center rounded-full border-2", on ? "border-brand" : "border-fg/25")}>
+                      <span className={cn("grid h-5 w-5 shrink-0 place-items-center rounded-full border-2", on ? "border-deep" : "border-fg/25")}>
                         {on && <span className="h-2.5 w-2.5 rounded-full bg-brand" />}
                       </span>
                       <ui.icon className="h-5 w-5 text-muted" aria-hidden />
@@ -249,7 +249,7 @@ export function CheckoutForm({
 
           <dl className={cn("mt-4 space-y-2 border-t pt-4 text-sm", quoting && "opacity-60")} aria-live="polite">
             <div className="flex justify-between"><dt className="text-muted">Subtotal</dt><dd>{formatMoney(quote?.subtotal ?? 0, activeCurrency)}</dd></div>
-            {!!quote?.discount_total && <div className="flex justify-between text-brand"><dt>Discount ({appliedCoupon?.toUpperCase()})</dt><dd>−{formatMoney(quote.discount_total, activeCurrency)}</dd></div>}
+            {!!quote?.discount_total && <div className="flex justify-between text-deep"><dt>Discount ({appliedCoupon?.toUpperCase()})</dt><dd>−{formatMoney(quote.discount_total, activeCurrency)}</dd></div>}
             {!!quote?.shipping_total && <div className="flex justify-between"><dt className="text-muted">Delivery</dt><dd>{formatMoney(quote.shipping_total, activeCurrency)}</dd></div>}
             <div className="flex justify-between border-t pt-3 text-lg font-semibold"><dt>Total</dt><dd>{formatMoney(quote?.total ?? 0, activeCurrency)}</dd></div>
           </dl>

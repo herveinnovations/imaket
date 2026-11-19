@@ -43,7 +43,7 @@ export function CreatorsTable({ creators }: { creators: Creator[] }) {
               <td data-label="">
                 <div className="flex items-center gap-3">
                   <Avatar name={c.store_name} src={c.avatar_url} color={c.brand_color} size={36} />
-                  <div><Link href={`/${c.handle}`} target="_blank" className="flex items-center gap-1 font-medium hover:underline">{c.store_name}{c.verified && <BadgeCheck className="h-4 w-4 text-brand" />}</Link><p className="text-xs text-muted">/{c.handle}</p></div>
+                  <div><Link href={`/${c.handle}`} target="_blank" className="flex items-center gap-1 font-medium hover:underline">{c.store_name}{c.verified && <BadgeCheck className="h-4 w-4 text-deep" />}</Link><p className="text-xs text-muted">/{c.handle}</p></div>
                 </div>
               </td>
               <td data-label="Country">{c.country}</td>

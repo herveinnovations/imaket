@@ -3,8 +3,8 @@ import type { ProductType } from "@/lib/types";
 
 /** Curated cover palette: [background, ink] */
 const PALETTE: [string, string][] = [
-  ["#2DD4BF", "#000000"], ["#000000", "#2DD4BF"], ["#E6E6E6", "#000000"], ["#E3F1EE", "#0F766E"],
-  ["#0F766E", "#2DD4BF"], ["#E6E6E6", "#0F766E"], ["#FFFFFF", "#000000"], ["#E3F1EE", "#000000"],
+  ["#54B9D2", "#000000"], ["#000000", "#54B9D2"], ["#E6E6E6", "#000000"], ["#E6F5FA", "#1D6B82"],
+  ["#1D6B82", "#54B9D2"], ["#E6E6E6", "#1D6B82"], ["#FFFFFF", "#000000"], ["#E6F5FA", "#000000"],
 ];
 
 function hash(s: string) {

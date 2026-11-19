@@ -59,7 +59,7 @@ export const DEMO_CREATORS: Creator[] = [
     "ZM", "ZMW", "#B45309", false, { instagram: "mwilathreads", whatsapp: "+260950000000" }),
   c("cr-zedcreatives", "zedcreatives", "Zed Creatives Collective", "Events for Zambia's creative economy",
     "We run meetups, workshops and the annual Copperbelt Creatives Summit.",
-    "ZM", "ZMW", "#0F766E", true, { instagram: "zedcreatives", website: "https://zedcreatives.org" }),
+    "ZM", "ZMW", "#1D6B82", true, { instagram: "zedcreatives", website: "https://zedcreatives.org" }),
 ];
 
 type Seed = Partial<Product> & Pick<Product, "id" | "creator_id" | "title" | "type" | "price" | "currency" | "category_id">;

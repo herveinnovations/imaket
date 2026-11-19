@@ -36,7 +36,7 @@ export default async function StorefrontPage({ params }: { params: Params }) {
   const { items } = await getProducts({ creatorId: creator.id, pageSize: 48 });
   const featured = items.filter((p) => creator.featured_product_ids.includes(p.id)).slice(0, 2);
   const rest = items.filter((p) => !featured.some((f) => f.id === p.id));
-  const brand = creator.brand_color ?? "#2DD4BF";
+  const brand = creator.brand_color ?? "#54B9D2";
   const s = creator.socials ?? {};
 
   return (

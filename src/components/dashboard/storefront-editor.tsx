@@ -10,13 +10,13 @@ import { CoverUpload } from "./file-upload";
 import { cn, siteHost } from "@/lib/utils";
 import type { Creator, Product } from "@/lib/types";
 
-const SWATCHES = ["#2DD4BF", "#000000", "#0F766E", "#E6E6E6", "#E3F1EE", "#1E3A8A", "#9D174D", "#C2410C"];
+const SWATCHES = ["#54B9D2", "#000000", "#1D6B82", "#E6E6E6", "#E6F5FA", "#1E3A8A", "#9D174D", "#C2410C"];
 
 export function StorefrontEditor({ creator, products }: { creator: Creator; products: Product[] }) {
   const router = useRouter();
   const [s, setS] = useState({
     store_name: creator.store_name, handle: creator.handle, tagline: creator.tagline ?? "", bio: creator.bio ?? "",
-    brand_color: creator.brand_color ?? "#2DD4BF", avatar_url: creator.avatar_url, banner_url: creator.banner_url,
+    brand_color: creator.brand_color ?? "#54B9D2", avatar_url: creator.avatar_url, banner_url: creator.banner_url,
     socials: { instagram: "", tiktok: "", x: "", youtube: "", website: "", whatsapp: "", ...creator.socials },
     featured_product_ids: creator.featured_product_ids ?? [],
     join_sitewide_sales: creator.join_sitewide_sales ?? true,
@@ -49,7 +49,7 @@ export function StorefrontEditor({ creator, products }: { creator: Creator; prod
             <Input label="Store name" name="store_name" value={s.store_name} onChange={(e) => up({ store_name: e.target.value })} required />
             <div>
               <label htmlFor="handle" className="label">Store link</label>
-              <div className="flex items-center rounded-xl border bg-surface focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/15">
+              <div className="flex items-center rounded-xl border bg-surface focus-within:border-deep focus-within:ring-4 focus-within:ring-deep/15">
                 <span className="pl-3.5 text-base text-muted">{siteHost()}/</span>
                 <input id="handle" value={s.handle} onChange={(e) => up({ handle: e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, "") })} className="h-11 min-w-0 flex-1 bg-transparent pr-3 outline-none" />
               </div>
@@ -101,7 +101,7 @@ export function StorefrontEditor({ creator, products }: { creator: Creator; prod
               return (
                 <li key={p.id}>
                   <label className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-surface-2/50">
-                    <input type="checkbox" checked={on} className="h-4 w-4 accent-[rgb(var(--brand))]"
+                    <input type="checkbox" checked={on} className="h-4 w-4 accent-[rgb(var(--deep))]"
                       onChange={() => up({ featured_product_ids: on ? s.featured_product_ids.filter((x) => x !== p.id) : [...s.featured_product_ids, p.id].slice(-2) })} />
                     <span className="text-sm font-medium">{p.title}</span>
                   </label>
@@ -135,7 +135,7 @@ export function StorefrontEditor({ creator, products }: { creator: Creator; prod
           </div>
           <div className="relative z-10 px-5 pb-6">
             <Avatar name={s.store_name} src={s.avatar_url} color={s.brand_color} size={72} fit="contain" className="-mt-9 border-4 border-bg" />
-            <p className="mt-3 flex items-center gap-1.5 font-display text-xl font-bold">{s.store_name || "Your store"}{creator.verified && <BadgeCheck className="h-5 w-5 text-brand" />}</p>
+            <p className="mt-3 flex items-center gap-1.5 font-display text-xl font-bold">{s.store_name || "Your store"}{creator.verified && <BadgeCheck className="h-5 w-5 text-deep" />}</p>
             <p className="text-sm text-muted">{s.tagline || "Your tagline"}</p>
             <p className="mt-3 line-clamp-4 text-sm leading-6">{s.bio}</p>
             <div className="mt-4 flex flex-wrap gap-1.5">

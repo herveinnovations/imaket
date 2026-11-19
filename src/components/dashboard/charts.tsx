@@ -32,15 +32,15 @@ export function RevenueChart({ data, currency, dataKey = "revenue", secondKey, h
         <AreaChart data={data} margin={{ top: 8, right: 4, left: -8, bottom: 0 }}>
           <defs>
             <linearGradient id="rev" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgb(var(--brand))" stopOpacity={0.28} />
-              <stop offset="100%" stopColor="rgb(var(--brand))" stopOpacity={0} />
+              <stop offset="0%" stopColor="rgb(var(--deep))" stopOpacity={0.28} />
+              <stop offset="100%" stopColor="rgb(var(--deep))" stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid vertical={false} stroke="rgb(var(--border))" strokeDasharray="3 4" />
           <XAxis dataKey="day" {...axis} tickFormatter={(d: string) => new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short" })} minTickGap={28} />
           <YAxis {...axis} tickFormatter={(v: number) => formatCompact(v)} width={48} />
           <Tooltip content={<ChartTooltip currency={currency} />} cursor={{ stroke: "rgb(var(--muted))", strokeDasharray: "3 3" }} />
-          <Area type="monotone" dataKey={dataKey} name="Revenue" stroke="rgb(var(--brand))" strokeWidth={2.25} fill="url(#rev)" activeDot={{ r: 4 }} />
+          <Area type="monotone" dataKey={dataKey} name="Revenue" stroke="rgb(var(--deep))" strokeWidth={2.25} fill="url(#rev)" activeDot={{ r: 4 }} />
           {secondKey && <Area type="monotone" dataKey={secondKey} name="Platform fees" stroke="rgb(var(--accent))" strokeWidth={2} fill="transparent" />}
         </AreaChart>
       </ResponsiveContainer>

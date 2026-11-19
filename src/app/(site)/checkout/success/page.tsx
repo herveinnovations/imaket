@@ -19,7 +19,7 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
 
   return (
     <div className="container flex max-w-xl flex-col items-center py-24 text-center">
-      <CircleCheck className="h-16 w-16 text-brand" strokeWidth={1.5} />
+      <CircleCheck className="h-16 w-16 text-deep" strokeWidth={1.5} />
       <h1 className="mt-6 text-4xl font-bold">{paid ? "Payment received" : "Confirming your payment"}</h1>
       {order && (
         <p className="mt-4 text-lg text-muted">
